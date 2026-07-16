@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>OpsForge — Control Room</title>
+<style>
+:root{--bg:#0e1116;--card:#1a212c;--line:#2a3341;--text:#e8ecf2;--muted:#9aa7b8;--accent:#f0a832;--good:#5fd08a;--bad:#f08a8a}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.5;padding:24px}
+.wrap{max-width:1100px;margin:0 auto}
+h1{font-size:1.4rem;margin-bottom:4px}
+h1 span{color:var(--accent)}
+.sub{color:var(--muted);font-size:.9rem;margin-bottom:24px}
+h2{font-size:1.05rem;margin:28px 0 12px}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px}
+.tile{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px}
+.tile .label{color:var(--muted);font-size:.8rem;text-transform:uppercase;letter-spacing:.5px}
+.tile .value{font-size:1.7rem;font-weight:800;margin-top:4px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px;margin-top:12px}
+table{width:100%;border-collapse:collapse;font-size:.92rem}
+th{color:var(--muted);text-align:left;font-weight:600;padding:8px 10px;border-bottom:1px solid var(--line)}
+td{padding:10px;border-bottom:1px solid var(--line);vertical-align:top}
+.badge{display:inline-flex;align-items:center;gap:6px;font-size:.85rem}
+.dot{width:8px;height:8px;border-radius:50%;display:inline-block}
+button{background:var(--accent);color:#14100a;border:none;border-radius:8px;padding:8px 14px;font-weight:700;cursor:pointer;font-size:.88rem}
+button.ghost{background:transparent;border:1px solid var(--line);color:var(--text)}
+button:hover{opacity:.9}
+input,select{background:#151a22;border:1px solid var(--line);border-radius:8px;color:var(--text);padding:9px 11px;font-size:.95rem;font-family:inherit}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.muted{color:var(--muted);font-size:.85rem}
+.err{color:var(--bad)}
+#gate{max-width:420px;margin:80px auto;text-align:center}
+#app{display:none}
+.alloc td{border-bottom:none;padding:6px 10px}
+</style></head><body>
+<div class="wrap">
+  <div id="gate" class="card">
+    <h1>Ops<span>Forge</span> Control Room</h1>
+    <p class="sub">Enter your admin key to unlock.</p>
+    <div class="row" style="justify-content:center">
+      <input id="keyInput" type="password" placeholder="Admin key">
+      <button onclick="unlock()">Unlock</button>
+    </div>
+    <p id="gateMsg" class="muted" style="margin-top:12px"></p>
+  </div>
+
+  <div id="app">
+    <div class="row" style="justify-content:space-between">
+      <div><h1>Ops<span>Forge</span> Control Room</h1>
+      <p class="sub" id="asof"></p></div>
+      <div class="row">
+        <button class="ghost" onclick="loadData()">↻ Refresh</button>
+        <button class="ghost" onclick="lock()">Lock</button>
+      </div>
+    </div>
+
+    <div class="tiles" id="tiles"></div>
+
+    <h2>This week's bank transfers (do these every Friday)</h2>
+    <div class="card">
+      <p class="muted" style="margin-bottom:10px">Based on this month's profit. Adjust percentages to your plan. This is bookkeeping guidance, not financial or tax advice — confirm with your accountant.</p>
+      <table class="alloc" id="allocTable"></table>
+    </div>
+
+    <h2>Orders</h2>
+    <div class="card" style="overflow-x:auto">
+      <table id="ordersTable"><thead><tr><th>Date</th><th>Business</th><th>Contact</th><th>Status</th><th>Amount</th><th>Action</th></tr></thead><tbody></tbody></table>
+      <p class="muted" id="ordersEmpty" style="display:none;padding:10px">No orders yet. Your first one will appear here the moment someone submits the questionnaire.</p>
+    </div>
+
+    <h2>Expenses</h2>
+    <div class="card">
+      <div class="row" style="margin-bottom:14px">
+        <input id="expLabel" placeholder="What was it? e.g. Anthropic credits" style="flex:1;min-width:200px">
+        <input id="expAmount" type="number" step="0.01" min="0" placeholder="Amount $" style="width:120px">
+        <select id="expCat"><option value="tools">Tools</option><option value="marketing">Marketing</option><option value="fees">Fees</option><option value="other">Other</option></select>
+        <button onclick="addExpense()">Add</button>
+      </div>
+      <table id="expTable"><thead><tr><th>Date</th><th>Label</th><th>Category</th><th>Amount</th></tr></thead><tbody></tbody></table>
+    </div>
+    <p class="muted" style="margin-top:18px" id="apiMsg"></p>
+  </div>
+</div>
+<script>
+var API = "https://wkcdeuovxlklipfolyen.supabase.co/functions/v1/dashboard";
+var KEY = localStorage.getItem("of_admin_key") || "";
+function fmt(cents){ return "$" + (cents/100).toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2}); }
+function api(payload){
+  return fetch(API, {method:"POST", headers:{"Content-Type":"application/json","x-admin-secret":KEY}, body:JSON.stringify(payload)})
+    .then(function(r){ return r.json().then(function(j){ if(!r.ok){ throw new Error(j.error||("HTTP "+r.status)); } return j; }); });
+}
+function unlock(){
+  KEY = document.getElementById("keyInput").value.trim();
+  if(!KEY){ return; }
+  document.getElementById("gateMsg").textContent = "Checking…";
+  document.getElementById("gateMsg").className = "muted";
+  api({action:"data"}).then(function(d){
+    localStorage.setItem("of_admin_key", KEY);
+    document.getElementById("gate").style.display="none";
+    document.getElementById("app").style.display="block";
+    render(d);
+  }).catch(function(e){ document.getElementById("gateMsg").textContent = e.message; document.getElementById("gateMsg").className="err"; });
+}
+function lock(){ localStorage.removeItem("of_admin_key"); location.reload(); }
+function loadData(){ api({action:"data"}).then(render).catch(function(e){ msg(e.message,true); }); }
+function msg(t,bad){ var el=document.getElementById("apiMsg"); el.textContent=t; el.className = bad?"err":"muted"; }
+var STATUS_META = {
+  "new":{color:"#9aa7b8",label:"New — awaiting payment"},
+  "paid":{color:"#f0a832",label:"Paid — queued"},
+  "generating":{color:"#f0a832",label:"Writing part 1 of 2…"},
+  "generating2":{color:"#f0a832",label:"Part 1 done — part 2 queued"},
+  "generating2b":{color:"#f0a832",label:"Writing part 2 of 2…"},
+  "delivered":{color:"#5fd08a",label:"✓ Delivered"},
+  "error":{color:"#f08a8a",label:"! Error — retry"}
+};
+function render(d){
+  document.getElementById("asof").textContent = "Live from your database · " + new Date().toLocaleString();
+  var m = d.metrics;
+  var tiles = [
+    ["Revenue (all-time)", fmt(m.revenue_all)],
+    ["Revenue (this month)", fmt(m.revenue_mtd)],
+    ["Expenses (this month)", fmt(m.expenses_mtd)],
+    ["Profit (this month)", fmt(m.revenue_mtd - m.expenses_mtd)],
+    ["Orders awaiting payment", m.count_new],
+    ["Delivered manuals", m.count_delivered],
+    ["Email leads", m.leads]
+  ];
+  var h = "";
+  for(var i=0;i<tiles.length;i++){ h += '<div class="tile"><div class="label">'+tiles[i][0]+'</div><div class="value">'+tiles[i][1]+'</div></div>'; }
+  document.getElementById("tiles").innerHTML = h;
+
+  var profit = Math.max(0, m.revenue_mtd - m.expenses_mtd);
+  var alloc = [["Taxes (set aside)",25],["Profit (your family's cut)",10],["Owner's pay",50],["Reinvest / operating",15]];
+  var ah = "<tr><th>Account</th><th>%</th><th>Transfer</th></tr>";
+  for(var a=0;a<alloc.length;a++){ ah += "<tr><td>"+alloc[a][0]+"</td><td>"+alloc[a][1]+"%</td><td><strong>"+fmt(Math.round(profit*alloc[a][1]/100))+"</strong></td></tr>"; }
+  document.getElementById("allocTable").innerHTML = ah;
+
+  var tb = document.querySelector("#ordersTable tbody"); tb.innerHTML = "";
+  document.getElementById("ordersEmpty").style.display = d.orders.length ? "none":"block";
+  for(var o=0;o<d.orders.length;o++){
+    var od = d.orders[o];
+    var sm = STATUS_META[od.status] || {color:"#9aa7b8",label:od.status};
+    var action = "";
+    if(od.status==="new"){ action = '<button onclick="markPaid(\''+od.id+'\')">Mark paid & fulfill</button>'; }
+    else if(od.status==="error"||od.status==="generating2"){ action = '<button onclick="retry(\''+od.id+'\')">Run fulfillment</button>'; }
+    var tr = document.createElement("tr");
+    tr.innerHTML = "<td>"+new Date(od.created_at).toLocaleDateString()+"</td>"+
+      "<td><strong>"+esc(od.business_name)+"</strong><br><span class=muted>"+esc(od.industry||"")+"</span></td>"+
+      "<td>"+esc(od.owner_name)+"<br><span class=muted>"+esc(od.email)+"</span></td>"+
+      '<td><span class="badge"><span class="dot" style="background:'+sm.color+'"></span>'+sm.label+'</span>'+(od.notes?'<br><span class="muted">'+esc(String(od.notes).slice(0,90))+'</span>':'')+"</td>"+
+      "<td>"+(od.amount_cents?fmt(od.amount_cents):"—")+"</td>"+
+      "<td>"+action+"</td>";
+    tb.appendChild(tr);
+  }
+
+  var eb = document.querySelector("#expTable tbody"); eb.innerHTML = "";
+  for(var x=0;x<d.expenses.length;x++){
+    var ex = d.expenses[x];
+    var er = document.createElement("tr");
+    er.innerHTML = "<td>"+new Date(ex.created_at).toLocaleDateString()+"</td><td>"+esc(ex.label)+"</td><td>"+esc(ex.category||"")+"</td><td>"+fmt(ex.amount_cents)+"</td>";
+    eb.appendChild(er);
+  }
+}
+function esc(s){ var d=document.createElement("div"); d.textContent=s==null?"":String(s); return d.innerHTML; }
+function markPaid(id){
+  var amt = prompt("Amount collected, in dollars:", "199");
+  if(amt===null){ return; }
+  var cents = Math.round(parseFloat(amt)*100);
+  if(!(cents>=0)){ msg("Invalid amount", true); return; }
+  msg("Recording payment and starting fulfillment…");
+  api({action:"mark_paid", order_id:id, amount_cents:cents}).then(function(r){
+    msg(r.fulfillment_note || "Payment recorded."); loadData();
+  }).catch(function(e){ msg(e.message, true); loadData(); });
+}
+function retry(id){
+  msg("Running fulfillment…");
+  api({action:"generate", order_id:id}).then(function(r){ msg(r.fulfillment_note||"Started."); loadData(); }).catch(function(e){ msg(e.message,true); loadData(); });
+}
+function addExpense(){
+  var label = document.getElementById("expLabel").value.trim();
+  var amt = Math.round(parseFloat(document.getElementById("expAmount").value)*100);
+  var cat = document.getElementById("expCat").value;
+  if(!label || !(amt>=0)){ msg("Enter a label and a valid amount.", true); return; }
+  api({action:"add_expense", label:label, amount_cents:amt, category:cat}).then(function(){ document.getElementById("expLabel").value=""; document.getElementById("expAmount").value=""; loadData(); }).catch(function(e){ msg(e.message,true); });
+}
+if(KEY){ document.getElementById("keyInput").value = KEY; unlock(); }
+</script></body></html>

@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OpsForge — Your Business, Out of Your Head</title>
+<meta name="description" content="A complete, custom Business Operating Manual for your small business — SOPs, roles, onboarding, and emergency protocols — delivered in 24 hours. Done for you.">
+<style>
+  :root{
+    --bg:#0e1116; --bg2:#151a22; --card:#1a212c; --line:#2a3341;
+    --text:#e8ecf2; --muted:#9aa7b8; --accent:#f0a832; --accent2:#ffc964;
+    --good:#5fd08a;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+  .wrap{max-width:1060px;margin:0 auto;padding:0 24px}
+  header{position:sticky;top:0;background:rgba(14,17,22,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);z-index:10}
+  .nav{display:flex;align-items:center;justify-content:space-between;padding:16px 0}
+  .logo{font-weight:800;font-size:1.25rem;letter-spacing:.5px}
+  .logo span{color:var(--accent)}
+  .nav a.cta{background:var(--accent);color:#14100a;padding:10px 20px;border-radius:8px;font-weight:700;text-decoration:none;font-size:.95rem}
+  .nav a.cta:hover{background:var(--accent2)}
+  .hero{padding:88px 0 72px;text-align:center}
+  .badge{display:inline-block;border:1px solid var(--accent);color:var(--accent);padding:5px 14px;border-radius:999px;font-size:.8rem;font-weight:600;letter-spacing:1px;text-transform:uppercase;margin-bottom:24px}
+  h1{font-size:clamp(2rem,5vw,3.3rem);line-height:1.12;font-weight:800;letter-spacing:-.5px}
+  h1 em{color:var(--accent);font-style:normal}
+  .sub{max-width:640px;margin:22px auto 0;color:var(--muted);font-size:1.15rem}
+  .hero .btns{margin-top:36px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+  .btn{display:inline-block;padding:15px 30px;border-radius:10px;font-weight:700;text-decoration:none;font-size:1.05rem}
+  .btn.primary{background:var(--accent);color:#14100a}
+  .btn.primary:hover{background:var(--accent2)}
+  .btn.ghost{border:1px solid var(--line);color:var(--text)}
+  .btn.ghost:hover{border-color:var(--accent);color:var(--accent)}
+  .trust{margin-top:26px;color:var(--muted);font-size:.9rem}
+  section{padding:72px 0;border-top:1px solid var(--line)}
+  h2{font-size:clamp(1.5rem,3.5vw,2.1rem);font-weight:800;letter-spacing:-.3px;margin-bottom:12px}
+  .lead{color:var(--muted);max-width:620px;margin-bottom:40px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:28px}
+  .card h3{font-size:1.1rem;margin-bottom:8px}
+  .card p{color:var(--muted);font-size:.97rem}
+  .num{display:inline-flex;width:34px;height:34px;align-items:center;justify-content:center;background:var(--accent);color:#14100a;border-radius:8px;font-weight:800;margin-bottom:14px}
+  .checklist{list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px 28px}
+  .checklist li{padding-left:30px;position:relative;color:var(--text)}
+  .checklist li::before{content:"✓";position:absolute;left:0;color:var(--good);font-weight:800}
+  .checklist li small{display:block;color:var(--muted)}
+  .price-box{background:linear-gradient(160deg,var(--card),var(--bg2));border:1px solid var(--accent);border-radius:18px;padding:44px;text-align:center;max-width:520px;margin:0 auto}
+  .price-old{color:var(--muted);text-decoration:line-through;font-size:1.2rem}
+  .price{font-size:3.2rem;font-weight:800;color:var(--accent);line-height:1}
+  .price small{font-size:1rem;color:var(--muted);font-weight:400}
+  .price-note{color:var(--muted);margin:14px 0 26px;font-size:.95rem}
+  form{max-width:640px;margin:0 auto}
+  .field{margin-bottom:18px;text-align:left}
+  label{display:block;font-weight:600;margin-bottom:6px;font-size:.95rem}
+  label .opt{color:var(--muted);font-weight:400}
+  input,select,textarea{width:100%;padding:13px 14px;background:var(--bg2);border:1px solid var(--line);border-radius:9px;color:var(--text);font-size:1rem;font-family:inherit}
+  input:focus,select:focus,textarea:focus{outline:none;border-color:var(--accent)}
+  textarea{min-height:110px;resize:vertical}
+  .hp{position:absolute;left:-9999px;opacity:0;height:0;overflow:hidden}
+  button[type=submit]{width:100%;padding:16px;background:var(--accent);color:#14100a;border:none;border-radius:10px;font-size:1.1rem;font-weight:800;cursor:pointer}
+  button[type=submit]:hover{background:var(--accent2)}
+  button[disabled]{opacity:.6;cursor:wait}
+  .msg{margin-top:16px;padding:14px;border-radius:9px;display:none;font-size:.97rem}
+  .msg.ok{display:block;background:rgba(95,208,138,.12);border:1px solid var(--good);color:var(--good)}
+  .msg.err{display:block;background:rgba(240,90,90,.1);border:1px solid #f05a5a;color:#f08a8a}
+  details{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 22px;margin-bottom:12px}
+  summary{cursor:pointer;font-weight:600}
+  details p{margin-top:10px;color:var(--muted)}
+  footer{border-top:1px solid var(--line);padding:36px 0;text-align:center;color:var(--muted);font-size:.9rem}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <div class="logo">Ops<span>Forge</span></div>
+    <a class="cta" href="#start">Get My Manual</a>
+  </div>
+</header>
+
+<section class="hero" style="border-top:none">
+  <div class="wrap">
+    <div class="badge">Founding-customer launch price</div>
+    <h1>Your business shouldn't<br>live in <em>your head</em>.</h1>
+    <p class="sub">OpsForge builds your complete <strong>Business Operating Manual</strong> — every procedure, role, and checklist your team needs to run without you — custom to your business, delivered to your inbox within 24 hours.</p>
+    <div class="btns">
+      <a class="btn primary" href="#start">Build My Operating Manual →</a>
+      <a class="btn ghost" href="#inside">See what's inside</a>
+    </div>
+    <p class="trust">Done <em>for</em> you — not another software tool you have to learn. One 10-minute questionnaire is all it takes.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>If you disappeared for two weeks, what would break?</h2>
+    <p class="lead">If the answer is "everything," you don't own a business — you own a job. Every missed vacation, every "just call me if something comes up," every new hire that takes months to train: that's the cost of a business that lives in the owner's head.</p>
+    <div class="grid">
+      <div class="card"><h3>Training takes forever</h3><p>Every new hire learns by shadowing you, because nothing is written down. You're the bottleneck for your own growth.</p></div>
+      <div class="card"><h3>Quality depends on who shows up</h3><p>Without documented standards, every job is done "their way." Customers notice the inconsistency before you do.</p></div>
+      <div class="card"><h3>You can't step away</h3><p>No documented systems means no real vacations, no sick days, and no shot at ever selling the business for what it's worth.</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>How it works</h2>
+    <p class="lead">Three steps. About ten minutes of your time. That's the whole process.</p>
+    <div class="grid">
+      <div class="card"><span class="num">1</span><h3>Tell us about your business</h3><p>Answer a short questionnaire — what you do, who's on the team, and where things break down today.</p></div>
+      <div class="card"><span class="num">2</span><h3>We forge your manual</h3><p>Our AI-powered system, built on proven operations frameworks, drafts a complete operating manual specific to your business — not a fill-in-the-blank template.</p></div>
+      <div class="card"><span class="num">3</span><h3>Delivered in 24 hours</h3><p>Your finished manual lands in your inbox, fully editable. Hand it to your team and take your first real day off.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="inside">
+  <div class="wrap">
+    <h2>What's inside your Operating Manual</h2>
+    <p class="lead">A complete operations system — the same structure consultants charge $5,000+ to build.</p>
+    <ul class="checklist">
+      <li>8–12 Standard Operating Procedures <small>Step-by-step checklists for your core workflows — starting with your biggest bottleneck</small></li>
+      <li>Org chart & role descriptions <small>Who owns what, scaled to your actual team</small></li>
+      <li>Customer journey map <small>First contact to repeat business, standardized</small></li>
+      <li>Hiring & 30-day onboarding plan <small>For your most likely next hire</small></li>
+      <li>Weekly & monthly operating rhythm <small>The meetings and metrics that keep it running</small></li>
+      <li>Owner-absence protocol <small>The "hit by a bus" section — what happens when you're not there</small></li>
+      <li>Mission, values & service standards <small>Drafted for you to refine, not a blank page</small></li>
+      <li>Fully editable document <small>It's your manual — change anything, forever</small></li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2 style="text-align:center">Simple pricing</h2>
+    <div class="price-box" style="margin-top:36px">
+      <div class="price-old">$349</div>
+      <div class="price">$199 <small>one-time</small></div>
+      <p class="price-note">Founding-customer price for our first 20 businesses, in exchange for honest feedback. Delivered within 24 hours. If it's not genuinely useful, reply to the delivery email and we'll refund you — you keep the manual.</p>
+      <a class="btn primary" href="#start">Start My Questionnaire →</a>
+    </div>
+  </div>
+</section>
+
+<section id="start">
+  <div class="wrap">
+    <h2 style="text-align:center">Build my Operating Manual</h2>
+    <p class="lead" style="text-align:center;margin-left:auto;margin-right:auto">Answer these questions and we'll take it from here. You'll get a confirmation and your invoice by email — nothing is charged until you approve it.</p>
+    <form id="intakeForm">
+      <input class="hp" type="text" name="website" tabindex="-1" autocomplete="off">
+      <div class="field"><label>Your name</label><input name="owner_name" required maxlength="200"></div>
+      <div class="field"><label>Email</label><input name="email" type="email" required maxlength="254"></div>
+      <div class="field"><label>Business name</label><input name="business_name" required maxlength="200"></div>
+      <div class="field"><label>Industry / what kind of business?</label><input name="industry" placeholder="e.g., residential cleaning, HVAC, marketing agency, gym" maxlength="200"></div>
+      <div class="field"><label>Team size</label>
+        <select name="team_size"><option>Just me</option><option>2–5</option><option>6–15</option><option>16–50</option><option>50+</option></select>
+      </div>
+      <div class="field"><label>What are your main services or products? <span class="opt">(a sentence or two)</span></label><textarea name="services" maxlength="1000"></textarea></div>
+      <div class="field"><label>What's the #1 thing that breaks down — or depends entirely on you — in your business today?</label><textarea name="biggest_bottleneck" required maxlength="2000"></textarea></div>
+      <button type="submit">Submit — Build My Manual</button>
+      <div class="msg" id="formMsg"></div>
+    </form>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Questions, answered</h2>
+    <details><summary>Is this just AI-generated fluff?</summary><p>The drafting is AI-powered — that's how we deliver in 24 hours at this price — but it's built on proven small-business operations frameworks and generated from <em>your</em> answers about <em>your</em> business. Every SOP references your actual services, your team, and the bottleneck you told us about. And if it isn't useful, you get your money back and keep the document.</p></details>
+    <details><summary>What format do I get?</summary><p>A fully editable document delivered by email. Edit it in Word, Google Docs, or Notion — it's yours forever, with no subscription required.</p></details>
+    <details><summary>How is this different from SOP software?</summary><p>Software gives you an empty tool and homework. OpsForge gives you the finished product. Most owners who buy SOP software never finish writing their SOPs — that's the whole problem we exist to solve.</p></details>
+    <details><summary>What kinds of businesses is this for?</summary><p>Service businesses with 1–50 people: cleaning, trades, agencies, gyms, restaurants, clinics, e-commerce. If your operations live in your head, this is for you.</p></details>
+    <details><summary>When do I pay?</summary><p>After you submit the questionnaire, we email you an invoice. Your manual is generated after payment — you're never charged automatically.</p></details>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">Ops<span style="color:var(--accent)">Forge</span> — Systems for businesses that shouldn't depend on their owner.<br>© 2026 OpsForge. All rights reserved.</div>
+</footer>
+
+<script>
+const FN_URL = "https://wkcdeuovxlklipfolyen.supabase.co/functions/v1/intake";
+document.getElementById("intakeForm").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const form = e.target;
+  const btn = form.querySelector("button[type=submit]");
+  const msg = document.getElementById("formMsg");
+  msg.className = "msg";
+  btn.disabled = true; btn.textContent = "Submitting…";
+  const data = Object.fromEntries(new FormData(form).entries());
+  data.kind = "order"; data.plan = "manual";
+  try {
+    const res = await fetch(FN_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    });
+    const out = await res.json().catch(() => ({}));
+    if (res.ok && out.ok) {
+      msg.className = "msg ok";
+      msg.textContent = "Got it! Check your inbox — your confirmation and invoice are on the way. Your manual ships within 24 hours of payment.";
+      form.reset();
+    } else {
+      msg.className = "msg err";
+      msg.textContent = out.error || "Something went wrong. Please try again.";
+    }
+  } catch {
+    msg.className = "msg err";
+    msg.textContent = "Network error — please try again in a moment.";
+  }
+  btn.disabled = false; btn.textContent = "Submit — Build My Manual";
+});
+</script>
+</body>
+</html>
