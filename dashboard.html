@@ -2,7 +2,7 @@
 <html lang="en"><head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex">
-<title>OpsForge // Control Room</title>
+<title>Field Manual HQ // Control Room</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=JetBrains+Mono:wght@400;600;800&display=swap" rel="stylesheet">
 <style>
@@ -157,7 +157,7 @@ input:focus,select:focus,textarea:focus{border-color:var(--cyan);box-shadow:0 0 
 
   <div id="gate" class="panel">
     <div class="reactor"></div>
-    <h1>Ops<b>Forge</b></h1>
+    <h1>Field Manual <b>HQ</b></h1>
     <p>Control Room // Authorization Required</p>
     <input id="keyInput" type="password" placeholder="ADMIN KEY">
     <button class="btn" style="width:100%" onclick="unlock()">Initialize</button>
@@ -169,7 +169,7 @@ input:focus,select:focus,textarea:focus{border-color:var(--cyan);box-shadow:0 0 
       <div class="brand">
         <div class="reactor"></div>
         <div>
-          <h1>Ops<b>Forge</b></h1>
+          <h1>Field Manual <b>HQ</b></h1>
           <div class="sys" id="sysline">CONTROL ROOM // SYSTEMS NOMINAL</div>
         </div>
       </div>
@@ -311,7 +311,7 @@ function renderAll(){
     ["Expenses / Month", fmt0(m.expenses_mtd), "amber", ""],
     ["Profit / Month", fmt0(m.revenue_mtd-m.expenses_mtd), "good", ""],
     ["Awaiting Payment", m.count_new, "amber", "orders"],
-    ["In The Forge", m.count_working, "cyan", "generating now"],
+    ["In Drafting", m.count_working, "cyan", "writing now"],
     ["Delivered", m.count_delivered, "good", "manuals shipped"]
   ];
   var h="";
@@ -380,9 +380,9 @@ function initials(name){
 var SMETA={
   "new":["#9aa7b8","NEW · AWAITING PAYMENT"],
   "paid":["#ffb03a","PAID · QUEUED"],
-  "generating":["#38e1ff","FORGING · PART 1/2"],
+  "generating":["#38e1ff","DRAFTING · PART 1/2"],
   "generating2":["#38e1ff","PART 1 DONE · QUEUED 2/2"],
-  "generating2b":["#38e1ff","FORGING · PART 2/2"],
+  "generating2b":["#38e1ff","DRAFTING · PART 2/2"],
   "delivered":["#3dffa0","DELIVERED"],
   "error":["#ff5d6c","ERROR · RETRY"]
 };
@@ -583,13 +583,13 @@ function pfMarkPaid(){
   if(amt===null){return;}
   var cents=Math.round(parseFloat(amt)*100);
   if(!(cents>=0)){ toast("Invalid amount",true); return; }
-  toast("Recording payment — starting the forge…");
+  toast("Recording payment — starting the machine…");
   api({action:"mark_paid",order_id:SELECTED,amount_cents:cents}).then(function(r){
     toast(r.fulfillment_note||"Started."); refreshProfile(); loadData(false);
   }).catch(function(e){ toast(e.message,true); });
 }
 function pfGenerate(){
-  toast("Firing the forge…");
+  toast("Running fulfillment…");
   api({action:"generate",order_id:SELECTED}).then(function(r){ toast(r.fulfillment_note||"Started."); refreshProfile(); loadData(false); })
     .catch(function(e){ toast(e.message,true); });
 }
