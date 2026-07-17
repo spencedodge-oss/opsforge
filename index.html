@@ -118,7 +118,7 @@
 
 <header>
   <div class="wrap nav">
-    <div class="logo">Field Manual <span>HQ</span><small>Standard Operating HQ</small></div>
+    <div class="logo">Field Manual <span>HQ</span><small>Systems &middot; Standards &middot; Freedom</small></div>
     <a class="cta" href="#start">Get My Manual</a>
   </div>
 </header>
@@ -132,14 +132,14 @@
       <a class="btn primary" href="#start">Build My Field Manual →</a>
       <a class="btn ghost" href="#sample">Read a real page first</a>
     </div>
-    <p class="trust">Done <em>for</em> you — not another software tool you have to learn. One 10-minute questionnaire, backed by our Make-It-Right guarantee.</p>
+    <p class="trust">Done <em>for</em> you — not another software tool you have to learn. One 10-minute questionnaire, backed by our Make-It-Right rewrite promise.</p>
   </div>
 </section>
 
 <div class="cred">
-  <div><b>Military-grade method</b><span>Founded by a career military operations leader — the people who wrote the book on running without any one person</span></div>
+  <div><b>Built on hard-earned doctrine</b><span>Founded by a military operations leader whose career ran through the special operations community — where the manual means no one is irreplaceable</span></div>
   <div><b>24-hour delivery</b><span>Questionnaire to finished manual in one day, not one quarter</span></div>
-  <div><b>Make-It-Right guarantee</b><span>If anything misses the mark, we rebuild it free until it's right — or refund you</span></div>
+  <div><b>Make-It-Right rewrite</b><span>If anything misses the mark in your first 14 days, we rewrite it free — your manual, made right</span></div>
 </div>
 
 <section>
@@ -159,7 +159,7 @@
   <div class="wrap">
     <div class="kicker">The Fix</div>
     <h2>How it works</h2>
-    <p class="lead">In the military, a field manual means the mission survives without any one person — including the commander. We build that for your business. Three steps, ten minutes of your time.</p>
+    <p class="lead">In the world the founder comes from, the field manual means the mission survives without any one person — including the commander. We build that for your business. Three steps, ten minutes of your time.</p>
     <div class="grid">
       <div class="card"><span class="num">1</span><h3>Tell us about your business</h3><p>Answer a short questionnaire — what you do, who's on the team, and where things break down today.</p></div>
       <div class="card"><span class="num">2</span><h3>We draft your Field Manual</h3><p>Our AI-powered system, built on proven operations frameworks, drafts a complete operating manual specific to your business — not a fill-in-the-blank template.</p></div>
@@ -238,7 +238,7 @@
         <p class="note">Optional — offered when your manual is delivered. No commitment today.</p>
       </div>
     </div>
-    <div class="guarantee"><b>The Make-It-Right Guarantee:</b> put your manual to work, and if anything misses the mark in your first 14 days, reply and tell us what — we rebuild those sections free until it's right. Still not useful after that? Full refund. The risk stays on our side of the table.</div>
+    <div class="guarantee"><b>The Make-It-Right Guarantee:</b> put your manual to work, and if anything misses the mark in your first 14 days, reply and tell us exactly what — we'll rewrite those sections free, done right. Custom work means all sales are final; the rewrite is how we stand behind every manual we ship.</div>
   </div>
 </section>
 
@@ -251,6 +251,9 @@
       <input class="hp" type="text" name="hp_check" tabindex="-1" autocomplete="off" aria-hidden="true">
       <div class="field"><label>Your name</label><input name="owner_name" required maxlength="200"></div>
       <div class="field"><label>Email</label><input name="email" type="email" required maxlength="254"></div>
+      <button type="button" id="stage1btn" onclick="unlockQuestionnaire()" style="width:100%;padding:16px;background:var(--accent);color:#14100a;border:none;border-radius:10px;font-size:1.1rem;font-weight:800;cursor:pointer">Start My Questionnaire →</button>
+      <p id="stage1note" style="color:var(--muted);font-size:.8rem;margin-top:10px;text-align:center">Takes about 10 minutes. We'll only email you about your manual — no spam, unsubscribe anytime.</p>
+      <div id="stage2" style="display:none">
       <div class="field"><label>Business name</label><input name="business_name" required maxlength="200"></div>
       <div class="field"><label>Industry / what kind of business?</label><input name="industry" placeholder="e.g., residential cleaning, HVAC, marketing agency, gym" maxlength="200"></div>
       <div class="field"><label>Team size</label>
@@ -269,7 +272,8 @@
       <div class="field"><label>Who's on the team, and what does each person actually do? <span class="opt">(optional)</span></label><textarea name="team_roles" maxlength="2000" placeholder="e.g., Me (everything), Maria (lead cleaner, trains new hires), Jake (part-time, weekends)…"></textarea></div>
       <div class="field"><label>What do customers praise most — and complain about most? <span class="opt">(optional)</span></label><textarea name="praise_complaints" maxlength="1000"></textarea></div>
       <div class="field"><label>What tools or software do you run on? <span class="opt">(optional)</span></label><input name="tools" maxlength="300" placeholder="e.g., Jobber, QuickBooks, Google Calendar, a whiteboard"></div>
-      <button type="submit">Submit — Build My Manual</button>
+      <button type="submit">Submit — Continue to Checkout</button>
+      </div>
       <div class="msg" id="formMsg"></div>
     </form>
   </div>
@@ -293,8 +297,8 @@
   <div class="wrap">
     <div class="kicker">Questions</div>
     <h2>Answered straight</h2>
-    <details><summary>Who's behind Field Manual HQ?</summary><p>A career military operations leader who spent years running missions where the field manual meant nobody was irreplaceable — and built this so small-business owners get the same freedom. The drafting engine is AI-powered; the standards behind it are not.</p></details>
-    <details><summary>Is this just AI-generated fluff?</summary><p>The drafting is AI-powered — that's how we deliver in 24 hours at this price — but it's built on proven small-business operations frameworks and generated from <em>your</em> answers about <em>your</em> business. Every SOP references your actual services, your team, and the bottleneck you told us about. Read the sample page above — that's the standard. And if anything misses the mark, we rebuild it free until it's right — or refund you.</p></details>
+    <details><summary>Who's behind Field Manual HQ?</summary><p>A military operations leader whose career ran through the special operations community — where the field manual is the reason nobody, at any level, is irreplaceable. He built Field Manual HQ so small-business owners get the same freedom. The drafting engine is AI-powered; the standards behind it are not.</p></details>
+    <details><summary>Is this just AI-generated fluff?</summary><p>The drafting is AI-powered — that's how we deliver in 24 hours at this price — but it's built on proven small-business operations frameworks and generated from <em>your</em> answers about <em>your</em> business. Every SOP references your actual services, your team, and the bottleneck you told us about. Read the sample page above — that's the standard. And if anything misses the mark in your first 14 days, we rewrite it free — that's the Make-It-Right promise.</p></details>
     <details><summary>What format do I get?</summary><p>A fully editable document delivered by email. Edit it in Word, Google Docs, or Notion — it's yours forever, with no subscription required.</p></details>
     <details><summary>How is this different from SOP software?</summary><p>Software gives you an empty tool and homework. Field Manual HQ gives you the finished product. Most owners who buy SOP software never finish writing their SOPs — that's the whole problem Field Manual HQ exists to solve.</p></details>
     <details><summary>What kinds of businesses is this for?</summary><p>Service businesses with 1–50 people: cleaning, trades, agencies, gyms, restaurants, clinics, e-commerce. If your operations live in your head, this is for you.</p></details>
@@ -342,6 +346,24 @@ document.getElementById("intakeForm").addEventListener("submit", async function(
   }
   btn.disabled = false; btn.textContent = "Submit — Build My Manual";
 });
+function unlockQuestionnaire(){
+  var form = document.getElementById("intakeForm");
+  var name = form.owner_name.value.trim();
+  var email = form.email.value.trim();
+  var msg = document.getElementById("formMsg");
+  msg.className = "msg";
+  if(!name || !email || email.indexOf("@") < 1){
+    msg.className = "msg err";
+    msg.textContent = "Enter your name and a valid email to continue.";
+    return;
+  }
+  // Capture the lead at the wall — even if they never finish, we can follow up.
+  fetch(FN_URL, { method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify({ kind:"lead", email: email, source:"questionnaire_gate" }) }).catch(function(){});
+  document.getElementById("stage1btn").style.display = "none";
+  document.getElementById("stage1note").style.display = "none";
+  document.getElementById("stage2").style.display = "block";
+  form.business_name.focus();
+}
 function grabGuide(){
   var el = document.getElementById("magnetEmail");
   var msg = document.getElementById("magnetMsg");
