@@ -4,7 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Field Manual HQ — Your Business, Out of Your Head</title>
-<meta name="description" content="A complete, custom Field Manual for your small business — SOPs, roles, onboarding, and emergency protocols — delivered in 24 hours. Done for you.">
+<meta name="description" content="A complete, custom Field Manual for your small business — SOPs, roles, onboarding, and an owner-absence protocol — delivered in 24 hours. Done for you, backed by our Make-It-Right guarantee.">
+<meta property="og:title" content="Field Manual HQ — Your business shouldn't live in your head.">
+<meta property="og:description" content="A complete, custom operations Field Manual for your business, delivered in 24 hours. Done for you — $199 founding price.">
+<meta property="og:url" content="https://fieldmanualhq.com">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='10' fill='%230e1116'/%3E%3Ctext x='32' y='42' font-family='Arial Black' font-size='26' font-weight='900' fill='%23f0a832' text-anchor='middle'%3EFM%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;900&display=swap" rel="stylesheet">
 <style>
   :root{
     --bg:#0e1116; --bg2:#151a22; --card:#1a212c; --line:#2a3341;
@@ -14,18 +22,20 @@
   *{margin:0;padding:0;box-sizing:border-box}
   html{scroll-behavior:smooth}
   body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+  h1,h2,h3,.logo{font-family:'Archivo',-apple-system,sans-serif}
   .wrap{max-width:1060px;margin:0 auto;padding:0 24px}
   header{position:sticky;top:0;background:rgba(14,17,22,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);z-index:10}
   .nav{display:flex;align-items:center;justify-content:space-between;padding:16px 0}
-  .logo{font-weight:800;font-size:1.25rem;letter-spacing:.5px}
+  .logo{font-weight:900;font-size:1.2rem;letter-spacing:.5px}
   .logo span{color:var(--accent)}
+  .logo small{display:block;font-size:.6rem;letter-spacing:.34em;color:var(--muted);font-weight:500;text-transform:uppercase}
   .nav a.cta{background:var(--accent);color:#14100a;padding:10px 20px;border-radius:8px;font-weight:700;text-decoration:none;font-size:.95rem}
   .nav a.cta:hover{background:var(--accent2)}
-  .hero{padding:88px 0 72px;text-align:center}
+  .hero{padding:80px 0 64px;text-align:center}
   .badge{display:inline-block;border:1px solid var(--accent);color:var(--accent);padding:5px 14px;border-radius:999px;font-size:.8rem;font-weight:600;letter-spacing:1px;text-transform:uppercase;margin-bottom:24px}
-  h1{font-size:clamp(2rem,5vw,3.3rem);line-height:1.12;font-weight:800;letter-spacing:-.5px}
+  h1{font-size:clamp(2rem,5vw,3.3rem);line-height:1.1;font-weight:900;letter-spacing:-.5px}
   h1 em{color:var(--accent);font-style:normal}
-  .sub{max-width:640px;margin:22px auto 0;color:var(--muted);font-size:1.15rem}
+  .sub{max-width:660px;margin:22px auto 0;color:var(--muted);font-size:1.15rem}
   .hero .btns{margin-top:36px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
   .btn{display:inline-block;padding:15px 30px;border-radius:10px;font-weight:700;text-decoration:none;font-size:1.05rem}
   .btn.primary{background:var(--accent);color:#14100a}
@@ -33,8 +43,13 @@
   .btn.ghost{border:1px solid var(--line);color:var(--text)}
   .btn.ghost:hover{border-color:var(--accent);color:var(--accent)}
   .trust{margin-top:26px;color:var(--muted);font-size:.9rem}
+  .cred{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1px;background:var(--line);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .cred div{background:var(--bg2);padding:22px;text-align:center}
+  .cred b{display:block;color:var(--accent);font-size:1.05rem;font-family:'Archivo';letter-spacing:.04em}
+  .cred span{color:var(--muted);font-size:.85rem}
   section{padding:72px 0;border-top:1px solid var(--line)}
-  h2{font-size:clamp(1.5rem,3.5vw,2.1rem);font-weight:800;letter-spacing:-.3px;margin-bottom:12px}
+  h2{font-size:clamp(1.5rem,3.5vw,2.1rem);font-weight:900;letter-spacing:-.3px;margin-bottom:12px}
+  .kicker{color:var(--accent);font-size:.75rem;font-weight:700;letter-spacing:.3em;text-transform:uppercase;margin-bottom:10px}
   .lead{color:var(--muted);max-width:620px;margin-bottom:40px}
   .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
   .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:28px}
@@ -45,11 +60,32 @@
   .checklist li{padding-left:30px;position:relative;color:var(--text)}
   .checklist li::before{content:"✓";position:absolute;left:0;color:var(--good);font-weight:800}
   .checklist li small{display:block;color:var(--muted)}
-  .price-box{background:linear-gradient(160deg,var(--card),var(--bg2));border:1px solid var(--accent);border-radius:18px;padding:44px;text-align:center;max-width:520px;margin:0 auto}
-  .price-old{color:var(--muted);text-decoration:line-through;font-size:1.2rem}
-  .price{font-size:3.2rem;font-weight:800;color:var(--accent);line-height:1}
+  /* sample document */
+  .doc{max-width:720px;margin:0 auto;background:#f4f0e6;color:#1c1a15;border-radius:8px;padding:38px 42px;font-family:Georgia,serif;box-shadow:0 20px 60px rgba(0,0,0,.5);position:relative}
+  .doc::before{content:"FM-04 · STANDARD OPERATING PROCEDURE";position:absolute;top:14px;right:20px;font-family:'Archivo';font-size:.6rem;letter-spacing:.2em;color:#8a8265}
+  .doc h3{font-family:'Archivo';font-size:1.05rem;letter-spacing:.02em;margin-bottom:4px;color:#1c1a15}
+  .doc .meta{font-size:.78rem;color:#6b6450;border-bottom:2px solid #1c1a15;padding-bottom:8px;margin-bottom:14px}
+  .doc p,.doc li{font-size:.92rem;line-height:1.6}
+  .doc ul{list-style:none;margin:8px 0}
+  .doc li{padding-left:26px;position:relative;margin:5px 0}
+  .doc li::before{content:"☐";position:absolute;left:2px}
+  .doc .qs{margin-top:14px;padding:10px 14px;background:#e9e2cf;border-left:3px solid #b8791e;font-size:.85rem}
+  .doc-note{max-width:720px;margin:16px auto 0;text-align:center;color:var(--muted);font-size:.85rem}
+  /* pricing */
+  .tiers{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;max-width:860px;margin:36px auto 0}
+  .tier{background:linear-gradient(160deg,var(--card),var(--bg2));border:1px solid var(--line);border-radius:18px;padding:38px 34px;text-align:center;position:relative}
+  .tier.hot{border-color:var(--accent)}
+  .tier .flag{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--accent);color:#14100a;font-size:.7rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;padding:4px 14px;border-radius:999px;white-space:nowrap}
+  .tier h3{font-size:1.05rem;letter-spacing:.06em;text-transform:uppercase}
+  .price-old{color:var(--muted);text-decoration:line-through;font-size:1.1rem;margin-top:10px}
+  .price{font-size:3rem;font-weight:900;color:var(--accent);line-height:1;font-family:'Archivo'}
   .price small{font-size:1rem;color:var(--muted);font-weight:400}
-  .price-note{color:var(--muted);margin:14px 0 26px;font-size:.95rem}
+  .tier ul{list-style:none;text-align:left;margin:20px 0;color:var(--muted);font-size:.93rem}
+  .tier ul li{padding:5px 0 5px 24px;position:relative}
+  .tier ul li::before{content:"✓";position:absolute;left:0;color:var(--good);font-weight:800}
+  .tier .note{font-size:.8rem;color:var(--muted)}
+  .guarantee{max-width:720px;margin:40px auto 0;border:1px dashed var(--good);border-radius:12px;padding:20px 26px;text-align:center;color:var(--text);font-size:.95rem}
+  .guarantee b{color:var(--good)}
   form{max-width:640px;margin:0 auto}
   .field{margin-bottom:18px;text-align:left}
   label{display:block;font-weight:600;margin-bottom:6px;font-size:.95rem}
@@ -64,36 +100,51 @@
   .msg{margin-top:16px;padding:14px;border-radius:9px;display:none;font-size:.97rem}
   .msg.ok{display:block;background:rgba(95,208,138,.12);border:1px solid var(--good);color:var(--good)}
   .msg.err{display:block;background:rgba(240,90,90,.1);border:1px solid #f05a5a;color:#f08a8a}
+  /* lead magnet band */
+  .magnet{background:linear-gradient(160deg,#1a212c,#14100a);border:1px solid var(--accent);border-radius:16px;padding:34px;max-width:760px;margin:0 auto;text-align:center}
+  .magnet h3{font-size:1.3rem;margin-bottom:8px}
+  .magnet p{color:var(--muted);margin-bottom:18px;font-size:.95rem}
+  .magnet .row{display:flex;gap:10px;max-width:460px;margin:0 auto;flex-wrap:wrap}
+  .magnet input{flex:1;min-width:220px}
+  .magnet button{padding:13px 22px;background:var(--accent);border:none;border-radius:9px;font-weight:800;color:#14100a;cursor:pointer}
   details{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 22px;margin-bottom:12px}
   summary{cursor:pointer;font-weight:600}
   details p{margin-top:10px;color:var(--muted)}
   footer{border-top:1px solid var(--line);padding:36px 0;text-align:center;color:var(--muted);font-size:.9rem}
+  footer a{color:var(--muted)}
 </style>
 </head>
 <body>
 
 <header>
   <div class="wrap nav">
-    <div class="logo">Field Manual <span>HQ</span></div>
+    <div class="logo">Field Manual <span>HQ</span><small>Standard Operating HQ</small></div>
     <a class="cta" href="#start">Get My Manual</a>
   </div>
 </header>
 
 <section class="hero" style="border-top:none">
   <div class="wrap">
-    <div class="badge">Founding-customer launch price</div>
+    <div class="badge">Founding price — first 20 businesses only</div>
     <h1>Your business shouldn't<br>live in <em>your head</em>.</h1>
-    <p class="sub">Field Manual HQ builds your business’s complete <strong>Field Manual</strong> — every procedure, role, and checklist your team needs to run without you — custom to your business, delivered to your inbox within 24 hours.</p>
+    <p class="sub">Field Manual HQ builds your business's complete <strong>Field Manual</strong> — every procedure, role, and checklist your team needs to run without you — custom to your business, delivered to your inbox within 24 hours.</p>
     <div class="btns">
       <a class="btn primary" href="#start">Build My Field Manual →</a>
-      <a class="btn ghost" href="#inside">See what's inside</a>
+      <a class="btn ghost" href="#sample">Read a real page first</a>
     </div>
-    <p class="trust">Done <em>for</em> you — not another software tool you have to learn. One 10-minute questionnaire is all it takes.</p>
+    <p class="trust">Done <em>for</em> you — not another software tool you have to learn. One 10-minute questionnaire, backed by our Make-It-Right guarantee.</p>
   </div>
 </section>
 
+<div class="cred">
+  <div><b>Military-grade method</b><span>Founded by a career military operations leader — the people who wrote the book on running without any one person</span></div>
+  <div><b>24-hour delivery</b><span>Questionnaire to finished manual in one day, not one quarter</span></div>
+  <div><b>Make-It-Right guarantee</b><span>If anything misses the mark, we rebuild it free until it's right — or refund you</span></div>
+</div>
+
 <section>
   <div class="wrap">
+    <div class="kicker">The Problem</div>
     <h2>If you disappeared for two weeks, what would break?</h2>
     <p class="lead">If the answer is "everything," you don't own a business — you own a job. Every missed vacation, every "just call me if something comes up," every new hire that takes months to train: that's the cost of a business that lives in the owner's head.</p>
     <div class="grid">
@@ -106,8 +157,9 @@
 
 <section>
   <div class="wrap">
+    <div class="kicker">The Fix</div>
     <h2>How it works</h2>
-    <p class="lead">Three steps. About ten minutes of your time. That's the whole process.</p>
+    <p class="lead">In the military, a field manual means the mission survives without any one person — including the commander. We build that for your business. Three steps, ten minutes of your time.</p>
     <div class="grid">
       <div class="card"><span class="num">1</span><h3>Tell us about your business</h3><p>Answer a short questionnaire — what you do, who's on the team, and where things break down today.</p></div>
       <div class="card"><span class="num">2</span><h3>We draft your Field Manual</h3><p>Our AI-powered system, built on proven operations frameworks, drafts a complete operating manual specific to your business — not a fill-in-the-blank template.</p></div>
@@ -116,18 +168,41 @@
   </div>
 </section>
 
+<section id="sample">
+  <div class="wrap">
+    <div class="kicker">Proof, Not Promises</div>
+    <h2 style="text-align:center">A page from a real Field Manual</h2>
+    <p class="lead" style="text-align:center;margin-left:auto;margin-right:auto">This is the level of detail every section is built to — written for one specific cleaning company, not copied from a template.</p>
+    <div class="doc">
+      <h3>SOP 1 — Morning Dispatch &amp; Route Assignment</h3>
+      <div class="meta">Owner: Operations Lead · Trigger: Every workday, 7:15 AM · Time budget: 20 minutes</div>
+      <p><strong>Purpose:</strong> Every crew leaves the shop by 7:45 AM knowing exactly where they're going, what "done" looks like at each stop, and who to call if something breaks — without the owner saying a word.</p>
+      <ul>
+        <li>7:15 — Open the day board. Confirm crew attendance against the schedule; activate the on-call sub if anyone is out.</li>
+        <li>7:20 — Review today's jobs. Flag any first-time customer (attach their Quality Checklist and gate code).</li>
+        <li>7:25 — Assign routes by zone, not by preference. Same crew, same zone, same weekday — customers learn faces.</li>
+        <li>7:35 — Each crew lead repeats back: stops, special notes, target finish time.</li>
+        <li>7:45 — Trucks roll. Anything unresolved goes to the Exceptions Log, not to the owner's phone.</li>
+      </ul>
+      <div class="qs"><strong>Quality standard:</strong> Zero calls to the owner before 9 AM. If the owner's phone rings during dispatch hours two days in a row, this SOP gets revised — not ignored.</div>
+    </div>
+    <p class="doc-note">Your manual contains seven of these — built around <em>your</em> services, <em>your</em> team, and the bottleneck you tell us about — plus roles, customer journey, onboarding, and the owner-absence protocol.</p>
+  </div>
+</section>
+
 <section id="inside">
   <div class="wrap">
+    <div class="kicker">The Deliverable</div>
     <h2>What's inside your Field Manual</h2>
     <p class="lead">A complete operations system — the same structure consultants charge $5,000+ to build.</p>
     <ul class="checklist">
-      <li>8–12 Standard Operating Procedures <small>Step-by-step checklists for your core workflows — starting with your biggest bottleneck</small></li>
+      <li>7 Standard Operating Procedures <small>Step-by-step checklists for your core workflows — starting with your biggest bottleneck</small></li>
       <li>Org chart & role descriptions <small>Who owns what, scaled to your actual team</small></li>
-      <li>Customer journey map <small>First contact to repeat business, standardized</small></li>
+      <li>Customer journey map <small>First contact to repeat business, with word-for-word scripts</small></li>
       <li>Hiring & 30-day onboarding plan <small>For your most likely next hire</small></li>
       <li>Weekly & monthly operating rhythm <small>The meetings and metrics that keep it running</small></li>
       <li>Owner-absence protocol <small>The "hit by a bus" section — what happens when you're not there</small></li>
-      <li>Mission, values & service standards <small>Drafted for you to refine, not a blank page</small></li>
+      <li>30-day adoption plan <small>Week-by-week rollout so the manual gets used, not shelved</small></li>
       <li>Fully editable document <small>It's your manual — change anything, forever</small></li>
     </ul>
   </div>
@@ -135,18 +210,41 @@
 
 <section>
   <div class="wrap">
-    <h2 style="text-align:center">Simple pricing</h2>
-    <div class="price-box" style="margin-top:36px">
-      <div class="price-old">$349</div>
-      <div class="price">$199 <small>one-time</small></div>
-      <p class="price-note">Founding-customer price for our first 20 businesses, in exchange for honest feedback. Delivered within 24 hours. If it's not genuinely useful, reply to the delivery email and we'll refund you — you keep the manual.</p>
-      <a class="btn primary" href="#start">Start My Questionnaire →</a>
+    <div class="kicker">Pricing</div>
+    <h2 style="text-align:center">Simple, and built to stay useful</h2>
+    <div class="tiers">
+      <div class="tier hot">
+        <span class="flag">The Flagship</span>
+        <h3>Your Field Manual</h3>
+        <div class="price-old">$349</div>
+        <div class="price">$199 <small>one-time</small></div>
+        <ul>
+          <li>Complete custom Field Manual, delivered in 24 hours</li>
+          <li>All 7 SOPs + roles, journey, onboarding, owner-absence protocol</li>
+          <li>Fully editable, yours forever — no subscription required</li>
+          <li>Founding price for our first 20 businesses</li>
+        </ul>
+        <a class="btn primary" href="#start" style="width:100%">Start My Questionnaire →</a>
+      </div>
+      <div class="tier">
+        <h3>Keep It Current</h3>
+        <div class="price" style="font-size:2.2rem;margin-top:26px">$29 <small>/month</small></div>
+        <ul>
+          <li>One full manual update every month, on request</li>
+          <li>New SOPs anytime — new service, new hire, new problem</li>
+          <li>30-day bottleneck check: if SOP #1 hasn't moved your bottleneck, we rewrite it free</li>
+          <li>Cancel anytime; your manual stays yours</li>
+        </ul>
+        <p class="note">Optional — offered when your manual is delivered. No commitment today.</p>
+      </div>
     </div>
+    <div class="guarantee"><b>The Make-It-Right Guarantee:</b> put your manual to work, and if anything misses the mark in your first 14 days, reply and tell us what — we rebuild those sections free until it's right. Still not useful after that? Full refund. The risk stays on our side of the table.</div>
   </div>
 </section>
 
 <section id="start">
   <div class="wrap">
+    <div class="kicker" style="text-align:center">Mission Start</div>
     <h2 style="text-align:center">Build my Field Manual</h2>
     <p class="lead" style="text-align:center;margin-left:auto;margin-right:auto">Answer these questions and we'll take it from here. You'll get a confirmation and your invoice by email — nothing is charged until you approve it.</p>
     <form id="intakeForm">
@@ -160,6 +258,17 @@
       </div>
       <div class="field"><label>What are your main services or products? <span class="opt">(a sentence or two)</span></label><textarea name="services" maxlength="1000"></textarea></div>
       <div class="field"><label>What's the #1 thing that breaks down — or depends entirely on you — in your business today?</label><textarea name="biggest_bottleneck" required maxlength="2000"></textarea></div>
+      <div class="field"><label>How long could you step away today before things broke?</label>
+        <select name="step_away_days"><option>A few hours, tops</option><option>A day or two</option><option>About a week</option><option>Two weeks or more</option></select>
+      </div>
+      <p style="color:var(--muted);font-size:.9rem;margin:26px 0 16px;border-top:1px dashed var(--line);padding-top:18px"><strong style="color:var(--text)">Optional — but gold.</strong> Every answer below makes your manual measurably sharper. Two minutes more, in your own words; rough notes are perfect.</p>
+      <div class="field"><label>How long have you been in business? <span class="opt">(optional)</span></label>
+        <select name="years_in_business"><option value="">—</option><option>Under 1 year</option><option>1–3 years</option><option>3–10 years</option><option>10+ years</option></select>
+      </div>
+      <div class="field"><label>Walk us through a typical job, from booking to done <span class="opt">(optional)</span></label><textarea name="typical_job" maxlength="2000" placeholder="e.g., Customer calls or books online → we quote → schedule → crew goes out → invoice after…"></textarea></div>
+      <div class="field"><label>Who's on the team, and what does each person actually do? <span class="opt">(optional)</span></label><textarea name="team_roles" maxlength="2000" placeholder="e.g., Me (everything), Maria (lead cleaner, trains new hires), Jake (part-time, weekends)…"></textarea></div>
+      <div class="field"><label>What do customers praise most — and complain about most? <span class="opt">(optional)</span></label><textarea name="praise_complaints" maxlength="1000"></textarea></div>
+      <div class="field"><label>What tools or software do you run on? <span class="opt">(optional)</span></label><input name="tools" maxlength="300" placeholder="e.g., Jobber, QuickBooks, Google Calendar, a whiteboard"></div>
       <button type="submit">Submit — Build My Manual</button>
       <div class="msg" id="formMsg"></div>
     </form>
@@ -168,8 +277,24 @@
 
 <section>
   <div class="wrap">
-    <h2>Questions, answered</h2>
-    <details><summary>Is this just AI-generated fluff?</summary><p>The drafting is AI-powered — that's how we deliver in 24 hours at this price — but it's built on proven small-business operations frameworks and generated from <em>your</em> answers about <em>your</em> business. Every SOP references your actual services, your team, and the bottleneck you told us about. And if it isn't useful, you get your money back and keep the document.</p></details>
+    <div class="magnet">
+      <h3>Not ready yet? Take the free field guide.</h3>
+      <p><strong>"The 7 SOPs Every Service Business Needs"</strong> — the exact procedures that stop a business from depending on its owner, and how to write the first one this week. Straight to your inbox.</p>
+      <div class="row">
+        <input id="magnetEmail" type="email" placeholder="you@yourbusiness.com" maxlength="254">
+        <button onclick="grabGuide()">Send It To Me</button>
+      </div>
+      <div class="msg" id="magnetMsg" style="text-align:center"></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="kicker">Questions</div>
+    <h2>Answered straight</h2>
+    <details><summary>Who's behind Field Manual HQ?</summary><p>A career military operations leader who spent years running missions where the field manual meant nobody was irreplaceable — and built this so small-business owners get the same freedom. The drafting engine is AI-powered; the standards behind it are not.</p></details>
+    <details><summary>Is this just AI-generated fluff?</summary><p>The drafting is AI-powered — that's how we deliver in 24 hours at this price — but it's built on proven small-business operations frameworks and generated from <em>your</em> answers about <em>your</em> business. Every SOP references your actual services, your team, and the bottleneck you told us about. Read the sample page above — that's the standard. And if anything misses the mark, we rebuild it free until it's right — or refund you.</p></details>
     <details><summary>What format do I get?</summary><p>A fully editable document delivered by email. Edit it in Word, Google Docs, or Notion — it's yours forever, with no subscription required.</p></details>
     <details><summary>How is this different from SOP software?</summary><p>Software gives you an empty tool and homework. Field Manual HQ gives you the finished product. Most owners who buy SOP software never finish writing their SOPs — that's the whole problem Field Manual HQ exists to solve.</p></details>
     <details><summary>What kinds of businesses is this for?</summary><p>Service businesses with 1–50 people: cleaning, trades, agencies, gyms, restaurants, clinics, e-commerce. If your operations live in your head, this is for you.</p></details>
@@ -178,27 +303,28 @@
 </section>
 
 <footer>
-  <div class="wrap">Field Manual <span style="color:var(--accent)">HQ</span> — Systems for businesses that shouldn't depend on their owner.<br>© 2026 Field Manual HQ. All rights reserved.</div>
+  <div class="wrap">Field Manual <span style="color:var(--accent)">HQ</span> — Systems for businesses that shouldn't depend on their owner.<br>
+  <a href="mailto:fieldmanualhq@gmail.com">fieldmanualhq@gmail.com</a> · © 2026 Field Manual HQ. All rights reserved.</div>
 </footer>
 
 <script>
-const FN_URL = "https://wkcdeuovxlklipfolyen.supabase.co/functions/v1/intake";
-document.getElementById("intakeForm").addEventListener("submit", async (e) => {
+var FN_URL = "https://wkcdeuovxlklipfolyen.supabase.co/functions/v1/intake";
+document.getElementById("intakeForm").addEventListener("submit", async function(e){
   e.preventDefault();
-  const form = e.target;
-  const btn = form.querySelector("button[type=submit]");
-  const msg = document.getElementById("formMsg");
+  var form = e.target;
+  var btn = form.querySelector("button[type=submit]");
+  var msg = document.getElementById("formMsg");
   msg.className = "msg";
   btn.disabled = true; btn.textContent = "Submitting…";
-  const data = Object.fromEntries(new FormData(form).entries());
+  var data = Object.fromEntries(new FormData(form).entries());
   data.kind = "order"; data.plan = "manual";
+  // Depth questions travel as a structured intake bundle.
+  var extras = ["years_in_business","typical_job","team_roles","praise_complaints","tools","step_away_days"];
+  data.intake = {};
+  extras.forEach(function(k){ if(data[k]){ data.intake[k] = data[k]; } delete data[k]; });
   try {
-    const res = await fetch(FN_URL, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
-    });
-    const out = await res.json().catch(() => ({}));
+    var res = await fetch(FN_URL, { method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify(data) });
+    var out = await res.json().catch(function(){ return {}; });
     if (res.ok && out.ok) {
       msg.className = "msg ok";
       msg.textContent = "Got it! Check your inbox — your confirmation and invoice are on the way. Your manual ships within 24 hours of payment.";
@@ -207,12 +333,26 @@ document.getElementById("intakeForm").addEventListener("submit", async (e) => {
       msg.className = "msg err";
       msg.textContent = out.error || "Something went wrong. Please try again.";
     }
-  } catch {
+  } catch (err) {
     msg.className = "msg err";
     msg.textContent = "Network error — please try again in a moment.";
   }
   btn.disabled = false; btn.textContent = "Submit — Build My Manual";
 });
+function grabGuide(){
+  var el = document.getElementById("magnetEmail");
+  var msg = document.getElementById("magnetMsg");
+  var email = el.value.trim();
+  msg.className = "msg";
+  if(!email || email.indexOf("@") < 1){ msg.className="msg err"; msg.textContent="Enter a valid email."; return; }
+  fetch(FN_URL, { method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify({ kind:"lead", email: email, source:"guide" }) })
+    .then(function(r){ return r.json(); })
+    .then(function(out){
+      if(out.ok){ msg.className="msg ok"; msg.textContent="On its way — check your inbox."; el.value=""; }
+      else { msg.className="msg err"; msg.textContent=out.error||"Something went wrong."; }
+    })
+    .catch(function(){ msg.className="msg err"; msg.textContent="Network error — try again."; });
+}
 </script>
 </body>
 </html>
