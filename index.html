@@ -246,7 +246,7 @@
   <div class="wrap">
     <div class="kicker" style="text-align:center">Mission Start</div>
     <h2 style="text-align:center">Build my Field Manual</h2>
-    <p class="lead" style="text-align:center;margin-left:auto;margin-right:auto">Answer these questions and we'll take it from here. You'll get a confirmation and your invoice by email — nothing is charged until you approve it.</p>
+    <p class="lead" style="text-align:center;margin-left:auto;margin-right:auto">Answer these questions, then you'll go straight to secure checkout ($199 founding price). Your Field Manual lands in your inbox within 24 hours of payment.</p>
     <form id="intakeForm">
       <input class="hp" type="text" name="hp_check" tabindex="-1" autocomplete="off" aria-hidden="true">
       <div class="field"><label>Your name</label><input name="owner_name" required maxlength="200"></div>
@@ -298,7 +298,7 @@
     <details><summary>What format do I get?</summary><p>A fully editable document delivered by email. Edit it in Word, Google Docs, or Notion — it's yours forever, with no subscription required.</p></details>
     <details><summary>How is this different from SOP software?</summary><p>Software gives you an empty tool and homework. Field Manual HQ gives you the finished product. Most owners who buy SOP software never finish writing their SOPs — that's the whole problem Field Manual HQ exists to solve.</p></details>
     <details><summary>What kinds of businesses is this for?</summary><p>Service businesses with 1–50 people: cleaning, trades, agencies, gyms, restaurants, clinics, e-commerce. If your operations live in your head, this is for you.</p></details>
-    <details><summary>When do I pay?</summary><p>After you submit the questionnaire, we email you an invoice. Your manual is generated after payment — you're never charged automatically.</p></details>
+    <details><summary>When do I pay?</summary><p>Right after the questionnaire — you'll be taken to Stripe's secure checkout. The moment payment clears, the machine starts writing, and your manual lands in your inbox within 24 hours (usually much faster).</p></details>
   </div>
 </section>
 
@@ -309,6 +309,7 @@
 
 <script>
 var FN_URL = "https://wkcdeuovxlklipfolyen.supabase.co/functions/v1/intake";
+var PAY_LINK = "https://buy.stripe.com/7sY8wQcgge1R03x5ZxaZi01";
 document.getElementById("intakeForm").addEventListener("submit", async function(e){
   e.preventDefault();
   var form = e.target;
@@ -327,8 +328,10 @@ document.getElementById("intakeForm").addEventListener("submit", async function(
     var out = await res.json().catch(function(){ return {}; });
     if (res.ok && out.ok) {
       msg.className = "msg ok";
-      msg.textContent = "Got it! Check your inbox — your confirmation and invoice are on the way. Your manual ships within 24 hours of payment.";
+      var pay = PAY_LINK + "?client_reference_id=" + encodeURIComponent(out.order_id || "") + "&prefilled_email=" + encodeURIComponent(data.email || "");
+      msg.innerHTML = "Order received! Taking you to secure checkout\u2026 If nothing happens, <a href=\"" + pay + "\" style=\"color:inherit;font-weight:700\">tap here to pay</a>.";
       form.reset();
+      setTimeout(function(){ window.location.href = pay; }, 1600);
     } else {
       msg.className = "msg err";
       msg.textContent = out.error || "Something went wrong. Please try again.";
