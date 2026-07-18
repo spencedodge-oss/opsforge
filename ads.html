@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Field Manual HQ — Your Business, Written Down in 24 Hours</title>
+<meta name="description" content="We write your small business's complete operating manual — SOPs, onboarding, quality checklists, and an owner-absence protocol — custom, in 24 hours. Done for you. $199 founding price.">
+<meta name="robots" content="noindex">
+<meta property="og:title" content="Your business, written down in 24 hours.">
+<meta property="og:description" content="A complete, custom operating manual for your business, delivered in 24 hours. Done for you — $199 founding price.">
+<meta property="og:url" content="https://fieldmanualhq.com/ads.html">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='10' fill='%230e1116'/%3E%3Ctext x='32' y='42' font-family='Arial Black' font-size='26' font-weight='900' fill='%23f0a832' text-anchor='middle'%3EFM%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0e1116; --bg2:#151a22; --card:#1a212c; --line:#2a3341;
+    --text:#e8ecf2; --muted:#9aa7b8; --accent:#f0a832; --accent2:#ffc964;
+    --good:#5fd08a;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+  h1,h2,h3,.logo{font-family:'Archivo',-apple-system,sans-serif}
+  .wrap{max-width:1060px;margin:0 auto;padding:0 24px}
+  header{position:sticky;top:0;background:rgba(14,17,22,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);z-index:10}
+  .nav{display:flex;align-items:center;justify-content:space-between;padding:16px 0}
+  .logo{font-weight:900;font-size:1.2rem;letter-spacing:.5px}
+  .logo span{color:var(--accent)}
+  .logo small{display:block;font-size:.6rem;letter-spacing:.34em;color:var(--muted);font-weight:500;text-transform:uppercase}
+  .nav a.cta{background:var(--accent);color:#14100a;padding:10px 20px;border-radius:8px;font-weight:700;text-decoration:none;font-size:.95rem}
+  .nav a.cta:hover{background:var(--accent2)}
+  .hero{padding:72px 0 60px;text-align:center}
+  .badge{display:inline-block;border:1px solid var(--accent);color:var(--accent);padding:5px 14px;border-radius:999px;font-size:.8rem;font-weight:600;letter-spacing:1px;text-transform:uppercase;margin-bottom:24px}
+  h1{font-size:clamp(2rem,5vw,3.3rem);line-height:1.1;font-weight:900;letter-spacing:-.5px}
+  h1 em{color:var(--accent);font-style:normal}
+  .sub{max-width:660px;margin:22px auto 0;color:var(--muted);font-size:1.15rem}
+  .hero .btns{margin-top:34px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+  .btn{display:inline-block;padding:15px 30px;border-radius:10px;font-weight:700;text-decoration:none;font-size:1.05rem}
+  .btn.primary{background:var(--accent);color:#14100a}
+  .btn.primary:hover{background:var(--accent2)}
+  .btn.ghost{border:1px solid var(--line);color:var(--text)}
+  .btn.ghost:hover{border-color:var(--accent);color:var(--accent)}
+  .trust{margin-top:24px;color:var(--muted);font-size:.9rem}
+  .cred{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1px;background:var(--line);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .cred div{background:var(--bg2);padding:22px;text-align:center}
+  .cred b{display:block;color:var(--accent);font-size:1.05rem;font-family:'Archivo';letter-spacing:.04em}
+  .cred span{color:var(--muted);font-size:.85rem}
+  section{padding:64px 0;border-top:1px solid var(--line)}
+  h2{font-size:clamp(1.5rem,3.5vw,2.1rem);font-weight:900;letter-spacing:-.3px;margin-bottom:12px}
+  .kicker{color:var(--accent);font-size:.75rem;font-weight:700;letter-spacing:.3em;text-transform:uppercase;margin-bottom:10px}
+  .lead{color:var(--muted);max-width:620px;margin-bottom:40px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:28px}
+  .card h3{font-size:1.1rem;margin-bottom:8px}
+  .card p{color:var(--muted);font-size:.97rem}
+  .checklist{list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px 28px}
+  .checklist li{padding-left:30px;position:relative;color:var(--text)}
+  .checklist li::before{content:"✓";position:absolute;left:0;color:var(--good);font-weight:800}
+  .checklist li small{display:block;color:var(--muted)}
+  .tiers{display:grid;grid-template-columns:1fr;gap:20px;max-width:460px;margin:36px auto 0}
+  .tier{background:linear-gradient(160deg,var(--card),var(--bg2));border:1px solid var(--accent);border-radius:18px;padding:38px 34px;text-align:center;position:relative}
+  .tier .flag{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--accent);color:#14100a;font-size:.7rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;padding:4px 14px;border-radius:999px;white-space:nowrap}
+  .tier h3{font-size:1.05rem;letter-spacing:.06em;text-transform:uppercase}
+  .price-old{color:var(--muted);text-decoration:line-through;font-size:1.1rem;margin-top:10px}
+  .price{font-size:3rem;font-weight:900;color:var(--accent);line-height:1;font-family:'Archivo'}
+  .price small{font-size:1rem;color:var(--muted);font-weight:400}
+  .tier ul{list-style:none;text-align:left;margin:20px 0;color:var(--muted);font-size:.93rem}
+  .tier ul li{padding:5px 0 5px 24px;position:relative}
+  .tier ul li::before{content:"✓";position:absolute;left:0;color:var(--good);font-weight:800}
+  .guarantee{max-width:720px;margin:32px auto 0;border:1px dashed var(--good);border-radius:12px;padding:20px 26px;text-align:center;color:var(--text);font-size:.95rem}
+  .guarantee b{color:var(--good)}
+  form{max-width:640px;margin:0 auto}
+  .field{margin-bottom:18px;text-align:left}
+  label{display:block;font-weight:600;margin-bottom:6px;font-size:.95rem}
+  label .opt{color:var(--muted);font-weight:400}
+  input,select,textarea{width:100%;padding:13px 14px;background:var(--bg2);border:1px solid var(--line);border-radius:9px;color:var(--text);font-size:1rem;font-family:inherit}
+  input:focus,select:focus,textarea:focus{outline:none;border-color:var(--accent)}
+  textarea{min-height:110px;resize:vertical}
+  .hp{position:absolute;left:-9999px;opacity:0;height:0;overflow:hidden}
+  button[type=submit]{width:100%;padding:16px;background:var(--accent);color:#14100a;border:none;border-radius:10px;font-size:1.1rem;font-weight:800;cursor:pointer}
+  button[type=submit]:hover{background:var(--accent2)}
+  button[disabled]{opacity:.6;cursor:wait}
+  .msg{margin-top:16px;padding:14px;border-radius:9px;display:none;font-size:.97rem}
+  .msg.ok{display:block;background:rgba(95,208,138,.12);border:1px solid var(--good);color:var(--good)}
+  .msg.err{display:block;background:rgba(240,90,90,.1);border:1px solid #f05a5a;color:#f08a8a}
+  details{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 22px;margin-bottom:12px}
+  summary{cursor:pointer;font-weight:600}
+  details p{margin-top:10px;color:var(--muted)}
+  footer{border-top:1px solid var(--line);padding:36px 0;text-align:center;color:var(--muted);font-size:.9rem}
+  footer a{color:var(--muted)}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <div class="logo">Field Manual <span>HQ</span><small>Systems &middot; Standards &middot; Freedom</small></div>
+    <a class="cta" href="#start">Get My Manual</a>
+  </div>
+</header>
+
+<section class="hero" style="border-top:none">
+  <div class="wrap">
+    <div class="badge">Founding price — first 20 businesses only</div>
+    <h1>Your business,<br>written down in <em>24 hours</em>.</h1>
+    <p class="sub">If you stepped away for two weeks, would it run — or stall? Field Manual HQ writes your business's complete operating manual — SOPs, onboarding, quality checklists, and the owner-absence plan — custom to your business, delivered tomorrow. <strong>Done for you.</strong></p>
+    <div class="btns">
+      <a class="btn primary" href="#start">Build My Field Manual →</a>
+      <a class="btn ghost" href="#inside">See what's inside</a>
+    </div>
+    <p class="trust">Not another app to learn. One 10-minute questionnaire, backed by our Make-It-Right rewrite promise.</p>
+  </div>
+</section>
+
+<div class="cred">
+  <div><b>Built on hard-earned doctrine</b><span>Founded by a military operations leader whose career ran through the special operations community — where the manual means no one is irreplaceable</span></div>
+  <div><b>24-hour delivery</b><span>Questionnaire to finished manual in one day, not one quarter</span></div>
+  <div><b>Make-It-Right rewrite</b><span>If anything misses the mark in your first 14 days, we rewrite it free</span></div>
+</div>
+
+<section>
+  <div class="wrap">
+    <div class="kicker">The Problem</div>
+    <h2>If you disappeared for two weeks, what would break?</h2>
+    <p class="lead">If the answer is "everything," you don't own a business — you own a job. The fix is the one the military figured out a century ago: write the system down.</p>
+    <div class="grid">
+      <div class="card"><h3>Training takes forever</h3><p>Every new hire learns by shadowing you, because nothing is written down. You're the bottleneck for your own growth.</p></div>
+      <div class="card"><h3>Quality depends on who shows up</h3><p>Without documented standards, every job is done "their way." Customers notice the inconsistency before you do.</p></div>
+      <div class="card"><h3>You can't step away</h3><p>No documented systems means no real vacations, no sick days, and no shot at ever selling the business for what it's worth.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="inside">
+  <div class="wrap">
+    <div class="kicker">The Deliverable</div>
+    <h2>What's inside your Field Manual</h2>
+    <p class="lead">A complete operations system — the same structure consultants charge $5,000+ to build.</p>
+    <ul class="checklist">
+      <li>7 Standard Operating Procedures <small>Step-by-step checklists for your core workflows — starting with your biggest bottleneck</small></li>
+      <li>Org chart & role descriptions <small>Who owns what, scaled to your actual team</small></li>
+      <li>Customer journey map <small>First contact to repeat business, with word-for-word scripts</small></li>
+      <li>Hiring & 30-day onboarding plan <small>For your most likely next hire</small></li>
+      <li>Weekly & monthly operating rhythm <small>The meetings and metrics that keep it running</small></li>
+      <li>Owner-absence protocol <small>The "hit by a bus" section — what happens when you're not there</small></li>
+      <li>30-day adoption plan <small>Week-by-week rollout so the manual gets used, not shelved</small></li>
+      <li>Fully editable document <small>It's your manual — change anything, forever</small></li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="kicker" style="text-align:center">Pricing</div>
+    <h2 style="text-align:center">One price. Yours forever.</h2>
+    <div class="tiers">
+      <div class="tier">
+        <span class="flag">The Flagship</span>
+        <h3>Your Field Manual</h3>
+        <div class="price-old">$349</div>
+        <div class="price">$199 <small>one-time</small></div>
+        <ul>
+          <li>Complete custom Field Manual, delivered in 24 hours</li>
+          <li>All 7 SOPs + roles, journey, onboarding, owner-absence protocol</li>
+          <li>Fully editable, yours forever — no subscription required</li>
+          <li>Founding price for our first 20 businesses</li>
+        </ul>
+        <a class="btn primary" href="#start" style="width:100%">Start My Questionnaire →</a>
+      </div>
+    </div>
+    <div class="guarantee"><b>The Make-It-Right Guarantee:</b> put your manual to work, and if anything misses the mark in your first 14 days, reply and tell us exactly what — we'll rewrite those sections free. Custom work means all sales are final; the rewrite is how we stand behind every manual we ship.</div>
+  </div>
+</section>
+
+<section id="start">
+  <div class="wrap">
+    <div class="kicker" style="text-align:center">Mission Start</div>
+    <h2 style="text-align:center">Build my Field Manual</h2>
+    <p class="lead" style="text-align:center;margin-left:auto;margin-right:auto">Answer these questions, then you'll go straight to secure checkout ($199 founding price). Your Field Manual lands in your inbox within 24 hours of payment.</p>
+    <form id="intakeForm">
+      <input class="hp" type="text" name="hp_check" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <div class="field"><label>Your name</label><input name="owner_name" required maxlength="200"></div>
+      <div class="field"><label>Email</label><input name="email" type="email" required maxlength="254"></div>
+      <button type="button" id="stage1btn" onclick="unlockQuestionnaire()" style="width:100%;padding:16px;background:var(--accent);color:#14100a;border:none;border-radius:10px;font-size:1.1rem;font-weight:800;cursor:pointer">Start My Questionnaire →</button>
+      <p id="stage1note" style="color:var(--muted);font-size:.8rem;margin-top:10px;text-align:center">Takes about 10 minutes. We will email you about your manual and the occasional helpful follow-up — one-click unsubscribe, anytime. <a href="privacy.html" style="color:inherit">Privacy Policy</a>.</p>
+      <div id="stage2" style="display:none">
+      <div class="field"><label>Business name</label><input name="business_name" required maxlength="200"></div>
+      <div class="field"><label>Industry / what kind of business?</label><input name="industry" placeholder="e.g., residential cleaning, HVAC, marketing agency, gym" maxlength="200"></div>
+      <div class="field"><label>Team size</label>
+        <select name="team_size"><option>Just me</option><option>2–5</option><option>6–15</option><option>16–50</option><option>50+</option></select>
+      </div>
+      <div class="field"><label>What are your main services or products? <span class="opt">(a sentence or two)</span></label><textarea name="services" maxlength="1000"></textarea></div>
+      <div class="field"><label>What's the #1 thing that breaks down — or depends entirely on you — in your business today?</label><textarea name="biggest_bottleneck" required maxlength="2000"></textarea></div>
+      <div class="field"><label>How long could you step away today before things broke?</label>
+        <select name="step_away_days"><option>A few hours, tops</option><option>A day or two</option><option>About a week</option><option>Two weeks or more</option></select>
+      </div>
+      <p style="color:var(--muted);font-size:.9rem;margin:26px 0 16px;border-top:1px dashed var(--line);padding-top:18px"><strong style="color:var(--text)">Optional — but gold.</strong> Every answer below makes your manual measurably sharper. Two minutes more, in your own words; rough notes are perfect.</p>
+      <div class="field"><label>How long have you been in business? <span class="opt">(optional)</span></label>
+        <select name="years_in_business"><option value="">—</option><option>Under 1 year</option><option>1–3 years</option><option>3–10 years</option><option>10+ years</option></select>
+      </div>
+      <div class="field"><label>Walk us through a typical job, from booking to done <span class="opt">(optional)</span></label><textarea name="typical_job" maxlength="2000" placeholder="e.g., Customer calls or books online → we quote → schedule → crew goes out → invoice after…"></textarea></div>
+      <div class="field"><label>Who's on the team, and what does each person actually do? <span class="opt">(optional)</span></label><textarea name="team_roles" maxlength="2000" placeholder="e.g., Me (everything), Maria (lead cleaner, trains new hires), Jake (part-time, weekends)…"></textarea></div>
+      <div class="field"><label>What do customers praise most — and complain about most? <span class="opt">(optional)</span></label><textarea name="praise_complaints" maxlength="1000"></textarea></div>
+      <div class="field"><label>What tools or software do you run on? <span class="opt">(optional)</span></label><input name="tools" maxlength="300" placeholder="e.g., Jobber, QuickBooks, Google Calendar, a whiteboard"></div>
+      <button type="submit">Submit — Continue to Checkout</button>
+      <p style="color:var(--muted);font-size:.78rem;margin-top:10px;text-align:center">By submitting you agree to our <a href="terms.html" style="color:inherit">Terms of Service</a> and <a href="privacy.html" style="color:inherit">Privacy Policy</a>.</p>
+      </div>
+      <div class="msg" id="formMsg"></div>
+    </form>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="kicker">Questions</div>
+    <h2>Answered straight</h2>
+    <details><summary>Is this just AI-generated fluff?</summary><p>The drafting is AI-powered — that's how we deliver in 24 hours at this price — but it's built on proven small-business operations frameworks and generated from <em>your</em> answers about <em>your</em> business. Every SOP references your actual services, your team, and the bottleneck you told us about. And if anything misses the mark in your first 14 days, we rewrite it free.</p></details>
+    <details><summary>How is this different from SOP software?</summary><p>Software gives you an empty tool and homework. Field Manual HQ gives you the finished product. Most owners who buy SOP software never finish writing their SOPs — that's the whole problem we exist to solve.</p></details>
+    <details><summary>What format do I get?</summary><p>A fully editable document delivered by email. Edit it in Word, Google Docs, or Notion — it's yours forever, no subscription required.</p></details>
+    <details><summary>When do I pay?</summary><p>Right after the questionnaire — Stripe's secure checkout. The moment payment clears, the machine starts writing, and your manual lands in your inbox within 24 hours.</p></details>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">Field Manual <span style="color:var(--accent)">HQ</span> — Systems for businesses that shouldn't depend on their owner.<br>
+  <a href="mailto:fieldmanualhq@gmail.com">fieldmanualhq@gmail.com</a> · <a href="terms.html">Terms</a> · <a href="privacy.html">Privacy</a> · © 2026 Field Manual HQ. All rights reserved.</div>
+</footer>
+
+<script>
+var FN_URL = "https://wkcdeuovxlklipfolyen.supabase.co/functions/v1/intake";
+var PAY_LINK = "https://buy.stripe.com/7sY8wQcgge1R03x5ZxaZi01";
+document.getElementById("intakeForm").addEventListener("submit", async function(e){
+  e.preventDefault();
+  var form = e.target;
+  var btn = form.querySelector("button[type=submit]");
+  var msg = document.getElementById("formMsg");
+  msg.className = "msg";
+  btn.disabled = true; btn.textContent = "Submitting…";
+  var data = Object.fromEntries(new FormData(form).entries());
+  data.kind = "order"; data.plan = "manual"; data.source = "ads";
+  var extras = ["years_in_business","typical_job","team_roles","praise_complaints","tools","step_away_days"];
+  data.intake = {};
+  extras.forEach(function(k){ if(data[k]){ data.intake[k] = data[k]; } delete data[k]; });
+  try {
+    var res = await fetch(FN_URL, { method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify(data) });
+    var out = await res.json().catch(function(){ return {}; });
+    if (res.ok && out.ok) {
+      msg.className = "msg ok";
+      var pay = PAY_LINK + "?client_reference_id=" + encodeURIComponent(out.order_id || "") + "&prefilled_email=" + encodeURIComponent(data.email || "");
+      msg.innerHTML = "Order received! Taking you to secure checkout… If nothing happens, <a href=\"" + pay + "\" style=\"color:inherit;font-weight:700\">tap here to pay</a>.";
+      form.reset();
+      setTimeout(function(){ window.location.href = pay; }, 1600);
+    } else {
+      msg.className = "msg err";
+      msg.textContent = out.error || "Something went wrong. Please try again.";
+    }
+  } catch (err) {
+    msg.className = "msg err";
+    msg.textContent = "Network error — please try again in a moment.";
+  }
+  btn.disabled = false; btn.textContent = "Submit — Continue to Checkout";
+});
+function unlockQuestionnaire(){
+  var form = document.getElementById("intakeForm");
+  var name = form.owner_name.value.trim();
+  var email = form.email.value.trim();
+  var msg = document.getElementById("formMsg");
+  msg.className = "msg";
+  if(!name || !email || email.indexOf("@") < 1){
+    msg.className = "msg err";
+    msg.textContent = "Enter your name and a valid email to continue.";
+    return;
+  }
+  fetch(FN_URL, { method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify({ kind:"lead", email: email, source:"ads_gate" }) }).catch(function(){});
+  document.getElementById("stage1btn").style.display = "none";
+  document.getElementById("stage1note").style.display = "none";
+  document.getElementById("stage2").style.display = "block";
+  form.business_name.focus();
+}
+</script>
+</body>
+</html>
