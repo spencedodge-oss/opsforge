@@ -25,13 +25,13 @@
   h1,h2,h3,.logo{font-family:'Archivo',-apple-system,sans-serif}
   .wrap{max-width:1060px;margin:0 auto;padding:0 24px}
   header{position:sticky;top:0;background:rgba(14,17,22,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);z-index:10}
-  .nav{display:flex;align-items:center;justify-content:space-between;padding:16px 0}
+  .nav{display:flex;align-items:center;justify-content:space-between;padding:16px 24px}
   .logo{font-weight:900;font-size:1.2rem;letter-spacing:.5px}
   .logo span{color:var(--accent)}
   .logo small{display:block;font-size:.6rem;letter-spacing:.34em;color:var(--muted);font-weight:500;text-transform:uppercase}
   .nav a.cta{background:var(--accent);color:#14100a;padding:10px 20px;border-radius:8px;font-weight:700;text-decoration:none;font-size:.95rem}
   .nav a.cta:hover{background:var(--accent2)}
-  .hero{padding:80px 0 64px;text-align:center}
+  .hero{padding:80px 0 64px;text-align:center;background:radial-gradient(ellipse 65% 55% at 50% -10%,rgba(240,168,50,.08),transparent 70%)}
   .badge{display:inline-block;border:1px solid var(--accent);color:var(--accent);padding:5px 14px;border-radius:999px;font-size:.8rem;font-weight:600;letter-spacing:1px;text-transform:uppercase;margin-bottom:24px}
   h1{font-size:clamp(2rem,5vw,3.3rem);line-height:1.1;font-weight:900;letter-spacing:-.5px}
   h1 em{color:var(--accent);font-style:normal}
@@ -210,6 +210,20 @@
 
 <section>
   <div class="wrap">
+    <div class="kicker" style="text-align:center">From the Founder</div>
+    <h2 style="text-align:center">Why I built this</h2>
+    <div style="max-width:720px;margin:24px auto 0;background:linear-gradient(160deg,var(--card),var(--bg2));border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:14px;padding:30px 36px;color:var(--muted);font-size:1.05rem;line-height:1.7;text-align:left">
+      <p style="margin-bottom:16px">I spent my career in special operations. In that world the field manual is sacred — it's the reason a mission never depends on one person being in the room. If someone goes down, the next one picks up the manual and the mission keeps moving.</p>
+      <p style="margin-bottom:16px">Then I watched people I respect pour their lives into businesses that ran entirely out of their own heads — no manual, no backup, no real day off. One bad week and the whole thing wobbles. That's not a business you own; it's a business that owns you.</p>
+      <p style="margin-bottom:22px">Field Manual HQ is me handing that discipline to the owners who never got issued one. Same principle, built for your business: write the system down so it survives you being gone. That's the entire mission.</p>
+      <p style="color:var(--text);font-family:'Archivo';font-weight:700;font-size:1.15rem">— Chris</p>
+      <p style="color:var(--muted);font-size:.85rem;margin-top:2px">Founder, Field Manual HQ</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
     <div class="kicker">Pricing</div>
     <h2 style="text-align:center">Simple, and built to stay useful</h2>
     <div class="tiers">
@@ -249,6 +263,10 @@
     <div class="kicker" style="text-align:center">Mission Start</div>
     <h2 style="text-align:center">Build my Field Manual</h2>
     <p class="lead" style="text-align:center;margin-left:auto;margin-right:auto">Answer these questions, then you'll go straight to secure checkout ($199 founding price). Your Field Manual lands in your inbox within 24 hours of payment.</p>
+    <div style="display:flex;align-items:center;justify-content:center;gap:8px;color:var(--muted);font-size:.85rem;margin:-24px auto 34px">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#5fd08a" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+      Secure checkout via Stripe &middot; No subscription required &middot; Make-It-Right guarantee
+    </div>
     <form id="intakeForm">
       <input class="hp" type="text" name="hp_check" tabindex="-1" autocomplete="off" aria-hidden="true">
       <div class="field"><label>Your name</label><input name="owner_name" required maxlength="200"></div>
