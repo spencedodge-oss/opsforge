@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Request a Revision — Field Manual HQ</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='10' fill='%230e1116'/%3E%3Ctext x='32' y='42' font-family='Arial Black' font-size='26' font-weight='900' fill='%23f0a832' text-anchor='middle'%3EFM%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#0e1116;--bg2:#151a22;--card:#1a212c;--line:#2a3341;--text:#e8ecf2;--muted:#9aa7b8;--accent:#f0a832;--accent2:#ffc964;--good:#5fd08a}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;min-height:100vh}
+  h1,h2,.logo{font-family:'Archivo',-apple-system,sans-serif}
+  .wrap{max-width:640px;margin:0 auto;padding:0 22px}
+  header{border-bottom:1px solid var(--line);padding:18px 0}
+  .logo{font-weight:900;font-size:1.15rem;letter-spacing:.5px}
+  .logo span{color:var(--accent)}
+  .logo small{display:block;font-size:.58rem;letter-spacing:.34em;color:var(--muted);font-weight:500;text-transform:uppercase}
+  main{padding:44px 0 80px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:30px 28px}
+  .kicker{color:var(--accent);font-size:.72rem;font-weight:700;letter-spacing:.28em;text-transform:uppercase;margin-bottom:10px}
+  h1{font-size:1.7rem;font-weight:900;letter-spacing:-.3px;line-height:1.15}
+  .for{color:var(--muted);margin-top:6px}
+  .badge{display:inline-block;margin-top:16px;border:1px solid var(--good);color:var(--good);border-radius:999px;padding:5px 14px;font-size:.78rem;font-weight:600}
+  .badge.one{border-color:var(--accent);color:var(--accent)}
+  label{display:block;font-weight:700;margin:26px 0 8px;font-size:1rem}
+  .hint{color:var(--muted);font-size:.9rem;margin-bottom:12px}
+  textarea{width:100%;min-height:150px;padding:14px;background:var(--bg2);border:1px solid var(--line);border-radius:10px;color:var(--text);font-size:1rem;font-family:inherit;resize:vertical}
+  textarea:focus{outline:none;border-color:var(--accent)}
+  button{width:100%;margin-top:18px;padding:16px;background:var(--accent);color:#14100a;border:none;border-radius:11px;font-size:1.08rem;font-weight:800;cursor:pointer}
+  button:hover{background:var(--accent2)}
+  button[disabled]{opacity:.6;cursor:wait}
+  .note{color:var(--muted);font-size:.82rem;margin-top:14px;text-align:center}
+  .state{display:none}
+  .state.on{display:block}
+  .msg{padding:16px;border-radius:11px;font-size:.98rem;margin-top:6px}
+  .msg.ok{background:rgba(95,208,138,.12);border:1px solid var(--good);color:var(--good)}
+  .msg.err{background:rgba(240,90,90,.1);border:1px solid #f05a5a;color:#f08a8a}
+  .big{text-align:center;padding:14px 0}
+  .big .tick{font-size:2.6rem}
+  .big h2{font-size:1.4rem;margin:10px 0 8px}
+  .big p{color:var(--muted)}
+  a.sub{color:var(--accent);font-weight:700;text-decoration:none}
+  footer{border-top:1px solid var(--line);padding:24px 0;text-align:center;color:var(--muted);font-size:.82rem}
+  footer a{color:var(--muted)}
+</style>
+</head>
+<body>
+<header><div class="wrap"><div class="logo">Field Manual <span>HQ</span><small>Systems &middot; Standards &middot; Freedom</small></div></div></header>
+<main><div class="wrap"><div class="card">
+
+  <div class="state on" id="loading"><div class="big"><h2>Loading your manual&hellip;</h2><p>One moment.</p></div></div>
+
+  <div class="state" id="ready">
+    <div class="kicker">Make-It-Right</div>
+    <h1>Request a revision</h1>
+    <div class="for" id="forLine"></div>
+    <div id="entitle"></div>
+    <label for="req">What would you like changed?</label>
+    <div class="hint">Tell us what to adjust &mdash; a section to rework, tone to shift, something to add. Or tell us more about your business, your real bottleneck, or how a job actually runs, and we'll sharpen the manual around it. Be as specific as you can.</div>
+    <textarea id="req" placeholder="e.g. Make SOP 3 shorter and add a section on handling refund requests. Also — we actually do most bookings by text now, not phone, so please reflect that throughout."></textarea>
+    <button id="send" onclick="submitReq()">Send My Revision Request</button>
+    <div class="note">We'll rebuild the affected sections and email your updated manual, usually within a few minutes.</div>
+    <div class="msg err state" id="rerr" style="margin-top:16px"></div>
+  </div>
+
+  <div class="state" id="used">
+    <div class="big">
+      <h2 id="usedTitle">You've used your revision</h2>
+      <p id="usedMsg"></p>
+      <p id="usedSub" style="margin-top:14px;display:none">Want a fresh update every month as your business grows? <a class="sub" id="subLink" href="#" target="_blank" rel="noopener">Add Keep It Current &rarr;</a></p>
+    </div>
+  </div>
+
+  <div class="state" id="done">
+    <div class="big">
+      <div class="tick">&#9989;</div>
+      <h2>On its way</h2>
+      <p id="doneMsg">Your revised Field Manual is being rebuilt and will land in your inbox shortly.</p>
+    </div>
+  </div>
+
+  <div class="state" id="fatal"><div class="msg err" id="fatalMsg"></div></div>
+
+</div></div></main>
+<footer><div class="wrap">Field Manual <span style="color:var(--accent)">HQ</span> &middot; <a href="https://fieldmanualhq.com">fieldmanualhq.com</a> &middot; <a href="mailto:fieldmanualhq@gmail.com">fieldmanualhq@gmail.com</a></div></footer>
+
+<script>
+var API="https://wkcdeuovxlklipfolyen.supabase.co/functions/v1/rewrite-manual";
+var SUBSCRIBE_URL="https://buy.stripe.com/cNi5kE1BC0b117B1JhaZi02";
+var TOKEN=new URLSearchParams(location.search).get("t")||"";
+function show(id){["loading","ready","used","done","fatal"].forEach(function(s){document.getElementById(s).classList.toggle("on",s===id);});}
+function setUsed(reason){
+  if(reason==="monthly"){
+    document.getElementById("usedTitle").textContent="This month's update is in";
+    document.getElementById("usedMsg").textContent="You get one refresh per month with Keep It Current — your next one unlocks at the start of next month. That gives your team time to actually put the current version to work before changing it again.";
+    document.getElementById("usedSub").style.display="none";
+  }else{
+    document.getElementById("usedTitle").textContent="You've used your free revision";
+    document.getElementById("usedMsg").textContent="Your one included revision is already in. Need more changes? Just reply to your manual email — a real person will help.";
+    document.getElementById("usedSub").style.display="block";
+  }
+  show("used");
+}
+function fatal(m){document.getElementById("fatalMsg").textContent=m;show("fatal");}
+document.getElementById("subLink").href=SUBSCRIBE_URL;
+
+if(!TOKEN){fatal("This link is missing its revision code. Please use the exact link from your manual delivery email.");}
+else{
+  fetch(API,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({action:"lookup",token:TOKEN})})
+    .then(function(r){return r.json();})
+    .then(function(o){
+      if(!o.ok){fatal(o.error||"We couldn't find your manual for this link.");return;}
+      document.getElementById("forLine").textContent="for "+o.business_name;
+      if(!o.available){setUsed(o.reason);return;}
+      var ent=document.getElementById("entitle");
+      ent.innerHTML=o.subscriber
+        ? '<span class="badge">Keep It Current &middot; 1 update per month</span>'
+        : '<span class="badge one">1 free revision included</span>';
+      show("ready");
+    })
+    .catch(function(){fatal("Something went wrong loading your manual. Please try again in a moment.");});
+}
+
+function submitReq(){
+  var t=(document.getElementById("req").value||"").trim();
+  var err=document.getElementById("rerr");
+  err.classList.remove("on");
+  if(t.length<5){err.textContent="Please describe the change you'd like.";err.classList.add("on");return;}
+  var btn=document.getElementById("send");
+  btn.disabled=true;btn.textContent="Rebuilding your manual… (this takes a moment)";
+  fetch(API,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({token:TOKEN,instructions:t})})
+    .then(function(r){return r.json().then(function(j){return{ok:r.ok,j:j};});})
+    .then(function(x){
+      if(x.ok&&x.j.ok){document.getElementById("doneMsg").textContent="Done — "+(x.j.changelog||"your changes are in")+". Your updated manual is on its way to your inbox now.";show("done");}
+      else if(x.j&&x.j.used){setUsed(x.j.reason);}
+      else{err.textContent=(x.j&&x.j.error)||"Something went wrong. Please try again.";err.classList.add("on");btn.disabled=false;btn.textContent="Send My Revision Request";}
+    })
+    .catch(function(){err.textContent="Network error — please try again in a moment.";err.classList.add("on");btn.disabled=false;btn.textContent="Send My Revision Request";});
+}
+</script>
+</body>
+</html>
