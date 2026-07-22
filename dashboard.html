@@ -152,6 +152,12 @@ input:focus,select:focus,textarea:focus{border-color:var(--cyan);box-shadow:0 0 
 /* expenses */
 .exp-row{display:flex;justify-content:space-between;align-items:center;padding:8px 4px;border-bottom:1px dashed rgba(71,198,230,.08);font-size:.86rem}
 .exp-row .amt{font-family:'JetBrains Mono';font-weight:600;color:var(--amber)}
+/* ad ops */
+.adtiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+.adtile{border:1px solid var(--line);border-radius:10px;background:rgba(6,12,20,.4)}
+.budgetbar{height:11px;border-radius:6px;background:rgba(74,217,154,.10);overflow:hidden;border:1px solid var(--line)}
+.budgetfill{height:100%;border-radius:6px;transition:width .8s cubic-bezier(.2,.7,.2,1)}
+.adnote{font-size:.66rem;color:var(--muted);margin-top:6px}
 /* rail */
 .rail{position:fixed;top:0;right:0;bottom:0;width:var(--rail);background:linear-gradient(180deg,rgba(9,15,23,.96),rgba(7,12,19,.96));backdrop-filter:blur(14px);border-left:1px solid var(--line2);z-index:6;display:none;flex-direction:column;box-shadow:-8px 0 40px rgba(0,0,0,.4)}
 body.unlocked .rail{display:flex}
@@ -268,6 +274,10 @@ body.unlocked .lrail{display:flex}
       <div class="panel"><div class="phead"><h2>Friday Transfers</h2><span class="tag">FROM PROFIT</span></div><div class="pbody"><table class="alloc-table" id="allocTable"></table><div class="muted" style="font-size:.66rem;color:var(--muted);margin-top:8px">Bookkeeping guidance, not tax advice.</div></div></div>
     </div>
 
+    <div class="panel" style="margin-bottom:16px"><div class="phead"><h2>Ad Operations</h2><span class="tag" id="adTag">CAMPAIGN TRACKER</span></div>
+      <div class="pbody"><div class="adtiles" id="adKpis"></div><div id="adBudget" style="margin-top:16px"></div>
+      <div class="adnote">Log ad spend below with category <b>Google Ads</b> or <b>Meta Ads</b> — it flows straight into these numbers. Ad revenue is attributed automatically from the ad landing page.</div></div></div>
+
     <div class="main" id="mainGrid">
       <div class="panel"><div class="phead"><h2>Customers &amp; Orders</h2><span class="tag" id="ordCount"></span></div><div id="ordersList"></div></div>
       <div class="panel" id="profile" style="display:none"><div class="phead"><h2>Customer Profile</h2><button class="btn sm ghost" onclick="closeProfile()">Close &#10005;</button></div><div class="pbody" id="profileBody"></div></div>
@@ -279,7 +289,7 @@ body.unlocked .lrail{display:flex}
         <div class="pbody"><div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px">
           <input id="expLabel" placeholder="What was it?" style="flex:1;min-width:150px">
           <input id="expAmount" type="number" step="0.01" min="0" placeholder="$" style="width:100px">
-          <select id="expCat"><option value="tools">Tools</option><option value="marketing">Marketing</option><option value="fees">Fees</option><option value="other">Other</option></select>
+          <select id="expCat"><option value="ads_google">Google Ads</option><option value="ads_meta">Meta Ads</option><option value="tools">Tools</option><option value="marketing">Marketing</option><option value="fees">Fees</option><option value="other">Other</option></select>
           <button class="btn sm" onclick="addExpense()">Log</button></div>
           <div id="expList"></div></div></div>
     </div>
@@ -303,12 +313,14 @@ body.unlocked .lrail{display:flex}
 
 <script>
 var API="https://wkcdeuovxlklipfolyen.supabase.co/functions/v1/dashboard";
+var REWRITE_URL="https://wkcdeuovxlklipfolyen.supabase.co/functions/v1/rewrite-manual";
 var KEY=localStorage.getItem("fmhq_key")||"";
 var DATA=null,SELECTED=null,DETAIL=null;
 function fmt(c){return "$"+(c/100).toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2});}
 function fmt0(c){return "$"+Math.round(c/100).toLocaleString();}
 function esc(s){var d=document.createElement("div");d.textContent=s==null?"":String(s);return d.innerHTML;}
 function initials(n){var p=String(n||"?").trim().split(/\s+/);return((p[0]||"?")[0]+(p.length>1?p[p.length-1][0]:"")).toUpperCase();}
+function catLabel(c){var m={tools:"Tools",marketing:"Marketing",fees:"Fees",other:"Other",ads_google:"Google Ads",ads_meta:"Meta Ads",ads:"Ads"};return m[c]||c||"Other";}
 function api(p){return fetch(API,{method:"POST",headers:{"Content-Type":"application/json","x-admin-secret":KEY},body:JSON.stringify(p)}).then(function(r){return r.json().then(function(j){if(!r.ok)throw new Error(j.error||("HTTP "+r.status));return j;});});}
 function toast(t,bad){var el=document.getElementById("toast");el.textContent=t;el.className=bad?"bad":"";el.style.display="block";clearTimeout(el._t);el._t=setTimeout(function(){el.style.display="none";},5000);}
 function ago(iso){var s=(Date.now()-new Date(iso).getTime())/1000;if(s<60)return "now";if(s<3600)return Math.floor(s/60)+"m";if(s<86400)return Math.floor(s/3600)+"h";return Math.floor(s/86400)+"d";}
@@ -448,7 +460,7 @@ function render(){
   // expenses
   var el=document.getElementById("expList");el.innerHTML="";
   (DATA.expenses||[]).forEach(function(ex){var row=document.createElement("div");row.className="exp-row";
-    row.innerHTML="<span>"+new Date(ex.created_at).toLocaleDateString()+" · "+esc(ex.label)+' <span style="color:var(--muted)">['+esc(ex.category||"other")+']</span></span><span><span class="amt">'+fmt(ex.amount_cents)+'</span> <button class="btn sm danger" data-eid="'+ex.id+'">×</button></span>';
+    row.innerHTML="<span>"+new Date(ex.created_at).toLocaleDateString()+" · "+esc(ex.label)+' <span style="color:var(--muted)">['+esc(catLabel(ex.category))+']</span></span><span><span class="amt">'+fmt(ex.amount_cents)+'</span> <button class="btn sm danger" data-eid="'+ex.id+'">×</button></span>';
     row.querySelector("button").onclick=function(){delExpense(ex.id);};el.appendChild(row);});
   if(!(DATA.expenses||[]).length)el.innerHTML='<div class="empty">No expenses logged</div>';
 
@@ -459,6 +471,26 @@ function render(){
     return '<div class="msg"><div class="mav" style="background:'+fm[0]+'22;color:'+fm[0]+';border:1px solid '+fm[0]+'44">'+fm[1]+'</div><div><div class="mmeta"><span class="mtype" style="color:'+fm[0]+'">'+fm[2]+'</span><span class="mtime">'+ago(e.created_at)+'</span></div><div class="mtext">'+esc(e.message)+'</div></div></div>';}).join("");rf.scrollTop=rf.scrollHeight;}
   document.getElementById("railCnt").textContent=events.length+" EVENTS";
   document.getElementById("railToday").textContent="last "+events.length;
+
+  // ad operations
+  var adSpend=m.ad_spend_all||0,adRev=m.ad_revenue||0,adOrd=m.ad_orders||0,adLd=m.ad_leads||0;
+  var cac=adOrd>0?adSpend/adOrd:0,roas=adSpend>0?adRev/adSpend:0;
+  var roasCls=adSpend>0?(roas>=1?"good":"bad"):"";
+  var at=[
+    ["Ad Spend · MTD",fmt0(m.ad_spend_mtd||0),"amber",fmt0(adSpend)+" all-time"],
+    ["Ad Customers",adOrd,"good",adLd+" leads from ads"],
+    ["Cost / Customer",adOrd>0?fmt0(cac):"—","cyan",adOrd>0?"CAC — spend ÷ customers":"no ad sales yet"],
+    ["ROAS",adSpend>0?(roas.toFixed(1)+"×"):"—",roasCls,adSpend>0?fmt0(adRev)+" ad revenue":"log spend to start"]
+  ];
+  document.getElementById("adKpis").innerHTML=at.map(function(k){return '<div class="kpi adtile"><div class="lbl">'+k[0]+'</div><div class="val '+k[2]+'">'+k[1]+'</div><div class="sub">'+k[3]+'</div></div>';}).join("");
+  var reinvest=15;try{JSON.parse(localStorage.getItem("fmhq_alloc")||"[]").forEach(function(a){if(/reinvest/i.test(a[0]))reinvest=a[1];});}catch(e){}
+  var pool=Math.round(m.revenue_all*reinvest/100),avail=pool-adSpend,over=adSpend>pool&&pool>=0;
+  var spentPct=pool>0?Math.min(100,Math.round(adSpend/pool*100)):(adSpend>0?100:0);
+  var plat=[];if(m.ad_spend_google)plat.push("Google "+fmt0(m.ad_spend_google));if(m.ad_spend_meta)plat.push("Meta "+fmt0(m.ad_spend_meta));
+  document.getElementById("adBudget").innerHTML=
+    '<div style="display:flex;justify-content:space-between;align-items:baseline;font-size:.78rem;color:var(--muted);margin-bottom:7px"><span>Stripe-funded ad budget · reinvest '+reinvest+'% of all-time revenue</span><span class="mono" style="color:'+(over?"var(--bad)":"var(--good)")+'">'+(over?("over by "+fmt0(adSpend-pool)):(fmt0(Math.max(0,avail))+" available"))+'</span></div>'+
+    '<div class="budgetbar"><div class="budgetfill" style="width:'+spentPct+'%;background:'+(over?"var(--bad)":"linear-gradient(90deg,var(--amber),var(--good))")+'"></div></div>'+
+    '<div class="adnote">Spent '+fmt0(adSpend)+' of '+fmt0(pool)+' pool'+(plat.length?" · "+plat.join(" · "):"")+' — keeps ad money inside the Stripe loop, not out of pocket.</div>';
 
   renderBriefing();
 }
@@ -485,6 +517,7 @@ function renderProfile(){var o=DETAIL;var sm=SMETA[o.status]||["#7d90a1",o.statu
   if(o.status==="error"||o.status==="paid"||o.status==="generating2"||o.status==="generating3")h+='<button class="btn amber" onclick="pfGenerate()">Run Fulfillment</button>';
   if(o.manual_md)h+='<button class="btn" onclick="pfResend()">Resend Manual</button>';
   h+='<button class="btn danger" id="pfDel" onclick="pfDelete(this)">Delete Record</button></div></div>';
+  if(o.manual_md)h+='<div class="pf-sec"><h4>Make-It-Right &mdash; Rewrite</h4><textarea id="pfRewriteTxt" style="width:100%;min-height:66px" placeholder="Paste the customer&#39;s change request — e.g. &#39;Shorten SOP 3 and add a section on refund handling&#39;"></textarea><div class="pf-actions" style="margin-top:8px"><button class="btn amber" onclick="pfRewrite()">Run Rewrite &amp; Re-deliver</button></div><div style="font-size:.66rem;color:var(--muted);margin-top:6px">Surgically revises the affected sections and emails the updated .docx (~20&ndash;40s).</div></div>';
   if(o.manual_md)h+='<div class="pf-sec"><h4>Manual Preview</h4><div class="manual">'+md(o.manual_md)+'</div></div>';
   document.getElementById("profileBody").innerHTML=h;}
 function saveProfile(){var amt=parseFloat(document.getElementById("pfAmt").value);var p={action:"update_order",order_id:SELECTED,owner_name:document.getElementById("pfOwner").value,business_name:document.getElementById("pfBiz").value,email:document.getElementById("pfEmail").value};if(!isNaN(amt))p.amount_cents=Math.round(amt*100);
@@ -492,7 +525,13 @@ function saveProfile(){var amt=parseFloat(document.getElementById("pfAmt").value
 function pfMarkPaid(){var a=prompt("Amount collected, in dollars:","199");if(a===null)return;var c=Math.round(parseFloat(a)*100);if(!(c>=0)){toast("Invalid amount",true);return;}toast("Recording payment — starting fulfillment…");
   api({action:"mark_paid",order_id:SELECTED,amount_cents:c}).then(function(r){toast(r.fulfillment_note||"Started.");refreshProfile();loadData(false);}).catch(function(e){toast(e.message,true);});}
 function pfGenerate(){toast("Running fulfillment…");api({action:"generate",order_id:SELECTED}).then(function(r){toast(r.fulfillment_note||"Started.");refreshProfile();loadData(false);}).catch(function(e){toast(e.message,true);});}
-function pfResend(){toast("Resending…");api({action:"resend",order_id:SELECTED}).then(function(){toast("Manual re-sent.");}).catch(function(e){toast(e.message,true);});}
+function pfResend(){toast("Resending…");api({action:"resend",order_id:SELECTED}).then(function(){toast("Manual re-sent as .docx.");}).catch(function(e){toast(e.message,true);});}
+function pfRewrite(){var el=document.getElementById("pfRewriteTxt");var t=(el&&el.value||"").trim();if(t.length<5){toast("Describe the change first.",true);return;}
+  toast("Running rewrite… ~20-40s. Hang tight.");
+  fetch(REWRITE_URL,{method:"POST",headers:{"Content-Type":"application/json","x-admin-secret":KEY},body:JSON.stringify({order_id:SELECTED,instructions:t})})
+    .then(function(r){return r.json().then(function(j){return{ok:r.ok,j:j};});})
+    .then(function(x){if(x.ok&&x.j.ok){toast("Revised "+(x.j.sections_changed||"")+" section(s): "+(x.j.changelog||"delivered"));if(el)el.value="";refreshProfile();loadData(false);}else{toast((x.j&&x.j.error)||"Rewrite failed",true);}})
+    .catch(function(){toast("Network error — try again.",true);});}
 function pfDelete(btn){if(btn.getAttribute("data-armed")!=="1"){btn.setAttribute("data-armed","1");btn.textContent="CONFIRM DELETE?";setTimeout(function(){btn.setAttribute("data-armed","0");btn.textContent="Delete Record";},3000);return;}
   api({action:"delete_order",order_id:SELECTED}).then(function(){toast("Record deleted.");closeProfile();loadData(false);}).catch(function(e){toast(e.message,true);});}
 function addExpense(){var l=document.getElementById("expLabel").value.trim(),a=Math.round(parseFloat(document.getElementById("expAmount").value)*100);if(!l||!(a>=0)){toast("Enter a label and amount.",true);return;}
