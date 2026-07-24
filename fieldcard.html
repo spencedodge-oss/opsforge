@@ -61,6 +61,22 @@ pintrk('page');
   .err{display:none;margin-top:16px;padding:14px;border-radius:11px;background:rgba(240,90,90,.1);border:1px solid #f05a5a;color:#f08a8a;font-size:.95rem}
   .err.on{display:block}
   .guarantee{margin-top:22px;color:var(--muted);font-size:.9rem;text-align:center;line-height:1.5}
+  .guarantee b{color:var(--text)}
+  .anchor{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:24px;padding:14px 18px;background:var(--bg2);border:1px solid var(--line);border-radius:12px}
+  .anchor-price{font-size:.95rem;color:var(--muted)}
+  .anchor-price b{font-family:'Archivo',sans-serif;font-size:1.35rem;color:var(--accent);font-weight:900;vertical-align:-1px}
+  .anchor-btn{background:var(--accent);color:#14100a;text-decoration:none;font-weight:800;font-size:.95rem;padding:11px 18px;border-radius:9px;white-space:nowrap}
+  .anchor-btn:hover{background:var(--accent2)}
+  .preview{margin-top:26px;background:linear-gradient(160deg,rgba(240,168,50,.07),rgba(240,168,50,.01));border:1px solid rgba(240,168,50,.35);border-radius:14px;padding:20px 22px}
+  .preview-h{font-family:'Archivo',sans-serif;font-weight:900;font-size:1.02rem;letter-spacing:-.1px;margin-bottom:12px}
+  .preview-l{list-style:none;margin:0;padding:0}
+  .preview-l li{position:relative;padding:6px 0 6px 26px;font-size:.97rem;color:var(--text)}
+  .preview-l li::before{content:"";position:absolute;left:2px;top:14px;width:8px;height:8px;border-radius:2px;background:var(--accent)}
+  .preview-f{margin-top:12px;padding-top:12px;border-top:1px solid rgba(240,168,50,.22);color:var(--muted);font-size:.88rem}
+  .proof{margin-top:26px}
+  .proof-q{background:var(--card);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:10px;padding:16px 18px;margin-bottom:12px}
+  .proof-q p{font-size:.97rem}
+  .proof-q cite{display:block;margin-top:8px;font-style:normal;font-size:.85rem;color:var(--muted)}
   footer{border-top:1px solid var(--line);padding:24px 0;text-align:center;color:var(--muted);font-size:.82rem}
   footer a{color:var(--muted)}
   @media(max-width:600px){h1{font-size:1.7rem}}
@@ -73,19 +89,51 @@ pintrk('page');
 <main><div class="wrap">
 
   <div class="kicker">The Field Card</div>
-  <h1>One procedure. Built for your worst bottleneck. <span class="amt">$27.</span></h1>
-  <p class="lede">Tell us the one thing in your business that keeps landing back on your plate. We'll write a single, ready-to-run Standard Operating Procedure for it &mdash; custom to your business, not a template &mdash; and email it to you as a polished document.</p>
+  <h1>The job you keep having to explain &mdash; written down properly. <span class="amt">$27.</span></h1>
+  <p class="lede">Name the one thing in your business that always comes back to you. We write it up as a step-by-step procedure your crew can actually follow &mdash; custom to your business, not a template &mdash; and email it to you, usually within the hour.</p>
+
+  <div class="anchor">
+    <div class="anchor-price"><b>$27</b> one-time &middot; delivered within the hour</div>
+    <a class="anchor-btn" href="#build">Build mine &rarr;</a>
+  </div>
+
+  <div class="preview">
+    <div class="preview-h">What actually lands in your inbox</div>
+    <ul class="preview-l">
+      <li>The procedure, start to finish, in the order it gets done</li>
+      <li>A checklist your crew can tick off on their phone</li>
+      <li>The word-for-word script for whatever gets said to the customer</li>
+      <li>What "done right" looks like, so you stop re-inspecting</li>
+      <li>The three ways this job usually goes wrong, and the fix for each</li>
+    </ul>
+    <div class="preview-f">Delivered as a clean, editable document &mdash; yours to change, print, or hand to a new hire on day one.</div>
+  </div>
 
   <ul class="points">
-    <li><b>Custom, not generic.</b> Written from your answers, aimed at your exact bottleneck.</li>
-    <li><b>Ready to run tomorrow.</b> A step-by-step checklist, the word-for-word scripts, and the standard for "done right."</li>
-    <li><b>Delivered fast.</b> It lands in your inbox automatically, usually within the hour.</li>
-    <li><b>Your $27 counts.</b> Love it and want the whole operating manual? We credit your $27 toward the full Field Manual.</li>
+    <li><b>Written for you, not pulled off a shelf.</b> Two businesses in the same trade get two different Field Cards, because you answer in your own words.</li>
+    <li><b>Your $27 isn't spent, it's banked.</b> If you go on to the full Field Manual, we credit the $27 against it.</li>
+    <li><b>You're not locked into anything.</b> One payment, one document. No subscription, no upsell you have to decline.</li>
   </ul>
 
-  <div class="card">
+  <!-- ===================================================================
+       TESTIMONIALS — currently hidden. When Chris sends real quotes,
+       delete this comment wrapper (the line above and the line below)
+       and replace the placeholder text. Do NOT publish invented quotes.
+  <div class="proof">
+    <div class="proof-q">
+      <p>&ldquo;Real quote goes here — ideally naming the specific job it fixed.&rdquo;</p>
+      <cite>First name, business name, city</cite>
+    </div>
+    <div class="proof-q">
+      <p>&ldquo;Second real quote.&rdquo;</p>
+      <cite>First name, business name, city</cite>
+    </div>
+  </div>
+  ==================================================================== -->
+
+  <div class="card" id="build">
     <h2>Build my Field Card</h2>
-    <div class="sub">Five quick questions. Then a secure $27 checkout.</div>
+    <div class="sub">Takes about a minute. Then a secure $27 checkout.</div>
 
     <div class="hp"><label>Website<input id="website" type="text" tabindex="-1" autocomplete="off"></label></div>
 
@@ -102,18 +150,19 @@ pintrk('page');
     <label>What kind of business? <span class="req">*</span></label>
     <input id="industry" type="text" placeholder="e.g. residential cleaning, HVAC, landscaping, salon">
 
-    <label>Your single worst bottleneck <span class="req">*</span></label>
-    <textarea id="biggest_bottleneck" placeholder="The one thing that always comes back to you. e.g. 'Every quote has to go through me, so nothing moves when I'm on a job.' The more specific, the sharper your Field Card."></textarea>
+    <label>What job do you want written up? <span class="req">*</span></label>
+    <textarea id="biggest_bottleneck" placeholder="e.g. 'Quoting a new job' or 'Every quote has to go through me, so nothing moves when I'm on a job.'"></textarea>
+    <p class="hint">One sentence is plenty &mdash; we'll work from it. Add more if you want it sharper.</p>
 
     <label id="bumpRow" style="display:none;margin-top:20px;background:linear-gradient(150deg,rgba(240,168,50,.10),rgba(240,168,50,.02));border:1px solid rgba(240,168,50,.5);border-radius:11px;padding:14px 16px;font-weight:400;cursor:pointer;font-size:.95rem;color:var(--text)"><input type="checkbox" id="bump3" onchange="updateBump()" style="width:auto;margin-right:8px;vertical-align:middle"> <b style="color:var(--accent)">Add 2 more procedures &mdash; get 3 Field Cards for $67</b> (+$40). We'll write your worst bottleneck <em>plus</em> the two next-most-valuable SOPs for your business.</label>
     <button id="go" onclick="submitCard()">Continue to secure checkout &rarr;</button>
-    <div class="price" id="priceNote">One-time <b>$27</b> &middot; instant delivery &middot; cancel anytime before you pay</div>
+    <div class="price" id="priceNote">One-time <b>$27</b> &middot; no subscription &middot; delivered within the hour</div>
     <div class="trust">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 2l7 3v6c0 4.5-3 8.3-7 9.5-4-1.2-7-5-7-9.5V5l7-3z" stroke="#5fd08a" stroke-width="2" stroke-linejoin="round"/><path d="M9 12l2 2 4-4" stroke="#5fd08a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
       Secure checkout by Stripe
     </div>
     <div class="err" id="err"></div>
-    <div class="guarantee">Backed by our Make-It-Right promise: if your Field Card misses the mark, we rewrite it free.</div>
+    <div class="guarantee"><b>The Make-It-Right promise.</b> If your Field Card misses the mark, tell us what's off and we rewrite it free, as many times as it takes. If we still can't get it right for you, we refund the $27.</div>
   </div>
 
 </div></main>
